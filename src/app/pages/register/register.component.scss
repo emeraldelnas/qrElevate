@@ -45,18 +45,15 @@
   display: flex;
 }
 
+.congrats p {
+  line-height: 1.25;
+}
+
 .qrcodeImage {
   display: flex;
   flex: 1;
   justify-content: center;
   padding: 0.5rem 0 1rem 0;
-}
-
-/* Add custom styles here */
-.center {
-  display: flex;
-  flex: 1;
-  justify-content: center;
 }
 
 .qrcode-screen-btns {

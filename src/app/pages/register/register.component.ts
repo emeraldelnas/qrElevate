@@ -171,7 +171,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     const link = document.createElement('a');
     link.href = url;
     // name of the file
-    link.download = 'Qrcode';
+    link.download = 'my-elevate-qr-code';
     link.click();
   }
 

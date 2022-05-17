@@ -138,11 +138,17 @@
 
     <div class="qrcodeImage" id="qr-image">
       <div *ngIf="generateQR">
+        <div class="congrats">
+          <p>Yeeeyyy!!! 😁🙌</p>
+          <p>You've been successfully registered! 👏</p>
+          <p>Please save your QR Code below and try not to lose it 😊</p>
+        </div>
+
         <qrcode
           #qrImage
           [qrdata]="qrData"
           [allowEmptyString]="true"
-          [ariaLabel]="'QR Code image with the following content...'"
+          [ariaLabel]="'Elevate QR Code'"
           [cssClass]="'center'"
           [colorDark]="'#000000'"
           [colorLight]="'#ffffff'"
@@ -158,6 +164,7 @@
         ></qrcode>
         <div class="qrcode-screen-btns">
           <button nbButton status="primary" (click)="saveAsImage(qrImage)">
+            <nb-icon icon="download"></nb-icon>
             Download Your QR Code
           </button>
           <button nbButton ghost (click)="back()">Go Back</button>

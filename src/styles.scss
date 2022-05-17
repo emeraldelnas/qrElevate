@@ -13,6 +13,13 @@ zxing-scanner {
   }
 }
 
+.center {
+  text-align: center;
+  // display: flex;
+  // flex: 1;
+  // justify-content: center;
+}
+
 nb-icon#attendee-icon {
   align-self: normal;
   padding: 0.25rem;
