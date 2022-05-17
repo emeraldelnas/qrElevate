@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "qr-elevate": {
+      "hosting": {
+        "qrElevate": [
+          "qr-elevate"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "qr-elevate"
+  }
+}
