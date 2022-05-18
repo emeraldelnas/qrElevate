@@ -70,6 +70,7 @@
           fullWidth
           shape="semi-round"
           placeholder="Mobile"
+          maxlength="11"
         />
         <div *ngIf="showError(mobile)">
           <div *ngIf="(mobile?.errors)!['required']" class="invalid-feedback">
@@ -109,6 +110,11 @@
             >{{ option.label }}</nb-radio
           >
         </nb-radio-group>
+        <div *ngIf="showError(sex)">
+          <div *ngIf="(sex?.errors)!['required']" class="invalid-feedback">
+            Please input your sex.
+          </div>
+        </div>
       </div>
       <div class="form-control">
         <label for="leader" class="label">Small Group Leader</label>

@@ -1,4 +1,3 @@
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { DbService } from '@services/db.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
@@ -47,11 +46,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   //   canvasHeight: 300,
   // };
 
-  constructor(
-    private fb: FormBuilder,
-    private storage: AngularFireStorage,
-    private db: DbService
-  ) {
+  constructor(private fb: FormBuilder, private db: DbService) {
     // this.uploadPercent = db.uploadPercent;
     // this.downloadUrl = db.downloadUrl;
   }
@@ -83,7 +78,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       birthdate: ['', Validators.required],
-      sex: ['male', Validators.required],
+      sex: ['', Validators.required],
       mobile: ['', Validators.required],
       leader: [''],
     });
@@ -210,7 +205,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   back(): void {
     this.submitted = false;
     this.generateQR = false;
-    this.registerForm.reset({ sex: 'male' });
+    this.registerForm.reset();
   }
 
   get firstName(): AbstractControl {
@@ -223,6 +218,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   get mobile(): AbstractControl {
     return <AbstractControl>this.registerForm.get('mobile');
+  }
+
+  get sex(): AbstractControl {
+    return <AbstractControl>this.registerForm.get('sex');
   }
 
   get birthdate(): AbstractControl {
