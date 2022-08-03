@@ -3,5 +3,7 @@ export interface Attendee {
   firstName: string;
   lastName: string;
   sex: string;
+  school?: string;
+  invitedBy?: string;
   isFirstTimer: boolean;
 }

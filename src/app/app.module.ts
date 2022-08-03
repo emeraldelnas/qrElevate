@@ -20,6 +20,7 @@ import {
   NbSpinnerModule,
   NbToastrModule,
   NbUserModule,
+  NbCheckboxModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -39,7 +40,13 @@ import { AttendeeDialogComponent } from './pages/scanner/attendee-dialog/attende
 import { RecordsComponent } from './pages/records/records.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, ScannerComponent, AttendeeDialogComponent, RecordsComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    ScannerComponent,
+    AttendeeDialogComponent,
+    RecordsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -55,6 +62,7 @@ import { RecordsComponent } from './pages/records/records.component';
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbEvaIconsModule,
+    NbCheckboxModule,
     NbIconModule,
     NbCardModule,
     NbUserModule,

@@ -71,6 +71,8 @@ export class ScannerComponent implements OnInit, OnDestroy {
                       firstName: res.firstName,
                       lastName: res.lastName,
                       sex: res.sex,
+                      school: res.school || '',
+                      invitedBy: res.invitedBy || '',
                       isFirstTimer: res.isFirstTimer,
                     };
 

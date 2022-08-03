@@ -17,7 +17,7 @@
       (ngSubmit)="submit()"
     >
       <div class="title">
-        <h1>Level Up Fridays</h1>
+        <h1>ELEVATE UNITE 2022</h1>
         <h2>Registration</h2>
       </div>
       <div class="form-control">
@@ -103,12 +103,9 @@
       <div class="form-control">
         <label class="label" for="sex">Sex</label>
         <nb-radio-group class="sex-options" formControlName="sex" name="sex">
-          <nb-radio
-            *ngFor="let option of sexOptions"
-            [value]="option.value"
-            [checked]="option.checked"
-            >{{ option.label }}</nb-radio
-          >
+          <nb-radio *ngFor="let option of sexOptions" [value]="option.value">{{
+            option.label
+          }}</nb-radio>
         </nb-radio-group>
         <div *ngIf="showError(sex)">
           <div *ngIf="(sex?.errors)!['required']" class="invalid-feedback">
@@ -117,7 +114,47 @@
         </div>
       </div>
       <div class="form-control">
-        <label for="leader" class="label">Small Group Leader</label>
+        <label for="school" class="label">School</label>
+        <input
+          formControlName="school"
+          name="school"
+          id="school"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="School"
+        />
+        <div *ngIf="showError(school)">
+          <div *ngIf="(school?.errors)!['required']" class="invalid-feedback">
+            Please enter your school.
+          </div>
+        </div>
+      </div>
+      <div class="form-control">
+        <label for="invitedBy" class="label"
+          >Invited by <small>(Leave blank if none)</small></label
+        >
+        <input
+          formControlName="invitedBy"
+          name="invitedBy"
+          id="invitedBy"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Invited by"
+        />
+      </div>
+      <div class="form-control" style="margin-top: 1.5rem">
+        <nb-checkbox formControlName="isFirstTimer"
+          >First time joining Elevate?</nb-checkbox
+        >
+      </div>
+      <div class="form-control">
+        <label for="leader" class="label"
+          >Small Group Leader <small>(Leave blank if none)</small></label
+        >
         <input
           formControlName="leader"
           name="leader"

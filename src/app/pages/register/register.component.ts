@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   isLoading = false;
 
   sexOptions = [
-    { value: 'male', label: 'Male', checked: true },
+    { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
   ];
 
@@ -80,6 +80,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       birthdate: ['', Validators.required],
       sex: ['', Validators.required],
       mobile: ['', Validators.required],
+      school: ['', Validators.required],
+      invitedBy: [''],
+      isFirstTimer: [false],
       leader: [''],
     });
   }
@@ -100,7 +103,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         ...formValues,
         birthdate: dayjs(formValues.birthdate).toISOString(),
         signature: '',
-        isFirstTimer: true,
       };
 
       this.db.addRegistrant(payload).then((docRef) => {
@@ -226,6 +228,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   get birthdate(): AbstractControl {
     return <AbstractControl>this.registerForm.get('birthdate');
+  }
+
+  get school(): AbstractControl {
+    return <AbstractControl>this.registerForm.get('school');
   }
 
   showError(control: AbstractControl): false | ValidationErrors | null {

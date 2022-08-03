@@ -68,6 +68,8 @@
             <th style="text-align: left; padding-right: 2rem">Name</th>
             <th style="text-align: right; padding-right: 2rem">Age</th>
             <th style="padding-right: 2rem">Sex</th>
+            <th style="padding-right: 2rem">School</th>
+            <th style="padding-right: 2rem">Invited By</th>
             <th>First-timer?</th>
           </tr>
           <tr *ngFor="let attendee of attendees | async">
@@ -79,6 +81,12 @@
             </td>
             <td style="text-transform: capitalize; padding-right: 2rem">
               {{ attendee.sex }}
+            </td>
+            <td style="text-transform: capitalize; padding-right: 2rem">
+              {{ attendee.school || "" }}
+            </td>
+            <td style="text-transform: capitalize; padding-right: 2rem">
+              {{ attendee.invitedBy || "" }}
             </td>
             <td>
               {{ attendee.isFirstTimer ? "Yes" : "No" }}
