@@ -1,5 +1,5 @@
 <div class="top">
-  <img src="../../../assets/elevate-logo-black.svg" alt="Elevate Logo" />
+  <img src="../../../assets/elevate-logo-white.svg" alt="Elevate Logo" />
 </div>
 
 <nb-card
@@ -17,11 +17,11 @@
       (ngSubmit)="submit()"
     >
       <div class="title">
-        <h1>ELEVATE UNITE 2022</h1>
+        <h1>ELEVATE LEVEL UP FRIDAYS</h1>
         <h2>Registration</h2>
       </div>
       <div class="form-control">
-        <label for="first-name" class="label">First Name</label>
+        <label for="first-name" class="label">First Name *</label>
         <input
           formControlName="firstName"
           name="first-name"
@@ -31,6 +31,7 @@
           fullWidth
           shape="semi-round"
           placeholder="First Name"
+          class="capitalize"
         />
         <div *ngIf="showError(firstName)">
           <div
@@ -42,7 +43,7 @@
         </div>
       </div>
       <div class="form-control">
-        <label for="last-name" class="label">Last Name</label>
+        <label for="last-name" class="label">Last Name *</label>
         <input
           formControlName="lastName"
           name="last-name"
@@ -52,6 +53,7 @@
           fullWidth
           shape="semi-round"
           placeholder="Last Name"
+          class="capitalize"
         />
         <div *ngIf="showError(lastName)">
           <div *ngIf="(lastName?.errors)!['required']" class="invalid-feedback">
@@ -60,7 +62,7 @@
         </div>
       </div>
       <div class="form-control">
-        <label for="mobile" class="label">Mobile</label>
+        <label for="mobile" class="label">Mobile *</label>
         <input
           formControlName="mobile"
           name="mobile"
@@ -79,7 +81,7 @@
         </div>
       </div>
       <div class="form-control">
-        <label for="birthdate" class="label">Birthdate</label>
+        <label for="birthdate" class="label">Birthdate *</label>
         <input
           nbInput
           fullWidth
@@ -101,7 +103,7 @@
         <nb-datepicker #dateTimePicker></nb-datepicker>
       </div>
       <div class="form-control">
-        <label class="label" for="sex">Sex</label>
+        <label class="label" for="sex">Sex *</label>
         <nb-radio-group class="sex-options" formControlName="sex" name="sex">
           <nb-radio *ngFor="let option of sexOptions" [value]="option.value">{{
             option.label
@@ -114,7 +116,7 @@
         </div>
       </div>
       <div class="form-control">
-        <label for="school" class="label">School</label>
+        <label for="school" class="label">School *</label>
         <input
           formControlName="school"
           name="school"
@@ -124,6 +126,7 @@
           fullWidth
           shape="semi-round"
           placeholder="School"
+          class="capitalize"
         />
         <div *ngIf="showError(school)">
           <div *ngIf="(school?.errors)!['required']" class="invalid-feedback">
@@ -144,6 +147,7 @@
           fullWidth
           shape="semi-round"
           placeholder="Invited by"
+          class="capitalize"
         />
       </div>
       <div class="form-control" style="margin-top: 1.5rem">
@@ -164,6 +168,7 @@
           fullWidth
           shape="semi-round"
           placeholder="Leader"
+          class="capitalize"
         />
       </div>
       <!-- <div class="form-control">
@@ -175,7 +180,7 @@
         ></signature-pad>
       </div> -->
       <div style="text-align: right; margin-top: 2rem">
-        <button nbButton status="primary">Submit</button>
+        <button nbButton status="primary">Submit Form</button>
       </div>
     </form>
 

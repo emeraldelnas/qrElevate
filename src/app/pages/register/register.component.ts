@@ -1,5 +1,11 @@
 import { DbService } from '@services/db.service';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -15,6 +21,7 @@ import dayjs from 'dayjs';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
   registerForm!: FormGroup;

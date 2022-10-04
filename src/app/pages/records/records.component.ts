@@ -33,4 +33,8 @@ export class RecordsComponent implements OnInit {
     this.attendees = this.db.oGetAttendeesSpecificDay(selectedDay);
     this.totals = this.db.getDayTotals(selectedDay);
   }
+
+  identify(index: number, item: any): number {
+    return item.created_at;
+  }
 }

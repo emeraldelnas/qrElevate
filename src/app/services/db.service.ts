@@ -206,6 +206,7 @@ export class DbService {
   }
 
   incrementAttendeesTotals(attendee: Attendee, docId: string): void {
+    const isFirstTimer = attendee.isFirstTimer ? 1 : 0;
     const maleIncrement = attendee.sex === 'male' ? 1 : 0;
     const maleFirstTimerIncrement =
       attendee.sex === 'male' && attendee.isFirstTimer ? 1 : 0;
@@ -219,7 +220,8 @@ export class DbService {
       .doc('totals')
       .update({
         ['totalAttendees']: firebase.firestore.FieldValue.increment(1),
-        ['totalFirstTimers']: firebase.firestore.FieldValue.increment(1),
+        ['totalFirstTimers']:
+          firebase.firestore.FieldValue.increment(isFirstTimer),
         ['totalMale']: firebase.firestore.FieldValue.increment(maleIncrement),
         ['totalMaleFirstTimers']: firebase.firestore.FieldValue.increment(
           maleFirstTimerIncrement

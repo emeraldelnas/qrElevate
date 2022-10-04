@@ -10,6 +10,16 @@
 .records-container {
   max-width: 1200px;
   margin: auto;
+
+  .records-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > div:first-child {
+      padding-left: 0.5rem;
+    }
+  }
 }
 
 .label {
@@ -48,5 +58,21 @@
   th,
   tr:not(:last-child) td {
     padding-bottom: 0.5rem;
+  }
+
+  td.count {
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding-right: 0.75rem;
+    text-align: right;
+  }
+
+  tr.first-timer-row {
+    background-color: #f2fdf2;
+  }
+
+  td.first-timer {
+    color: #41a841;
+    font-weight: 700;
   }
 }
