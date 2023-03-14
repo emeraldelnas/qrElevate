@@ -62,6 +62,23 @@ export class DbService {
       );
   }
 
+  oGetMenRegistrants(): Observable<Registrant[]> {
+    return this.afs
+      .collection('registrants', (ref) => {
+        return ref.where('sex', '==', 'male');
+      })
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data = a.payload.doc.data() as Registrant;
+            const id = a.payload.doc.id;
+            return { docId: id, ...data };
+          })
+        )
+      );
+  }
+
   // oGetTodayAttendees(): Observable<any> {
   //   return this.afs
   //     .collection('attendees')

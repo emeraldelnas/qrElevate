@@ -38,6 +38,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { ScannerComponent } from './pages/scanner/scanner.component';
 import { AttendeeDialogComponent } from './pages/scanner/attendee-dialog/attendee-dialog.component';
 import { RecordsComponent } from './pages/records/records.component';
+import { RegistrantsComponent } from './pages/registrants/registrants.component';
+import { AgePipe } from './shared/pipes/age.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { RecordsComponent } from './pages/records/records.component';
     ScannerComponent,
     AttendeeDialogComponent,
     RecordsComponent,
+    RegistrantsComponent,
+    AgePipe,
   ],
   imports: [
     BrowserModule,

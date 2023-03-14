@@ -1,0 +1,21 @@
+.top {
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+  img {
+    width: 100%;
+    max-width: 180px;
+  }
+}
+
+tbody {
+  tr {
+    &:nth-child(odd) {
+      background-color: #eee;
+    }
+
+    td {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+}

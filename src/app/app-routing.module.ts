@@ -4,6 +4,7 @@ import { ScannerComponent } from './pages/scanner/scanner.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RegistrantsComponent } from './pages/registrants/registrants.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'scanner' },
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'records',
     component: RecordsComponent,
+  },
+  {
+    path: 'registrants',
+    component: RegistrantsComponent,
   },
 ];
 
