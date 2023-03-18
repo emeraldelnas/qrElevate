@@ -1,10 +1,10 @@
 import { RecordsComponent } from './pages/records/records.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ScannerComponent } from './pages/scanner/scanner.component';
-import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistrantsComponent } from './pages/registrants/registrants.component';
+import { AllRegistrantsComponent } from './pages/all-registrants/all-registrants.component';
+import { MenRegistrantsComponent } from './pages/men-registrants/men-registrants.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'scanner' },
@@ -21,8 +21,12 @@ const routes: Routes = [
     component: RecordsComponent,
   },
   {
-    path: 'registrants',
-    component: RegistrantsComponent,
+    path: 'all-registrants',
+    component: AllRegistrantsComponent,
+  },
+  {
+    path: 'men-registrants',
+    component: MenRegistrantsComponent,
   },
 ];
 

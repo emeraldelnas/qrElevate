@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-registrants',
-  templateUrl: './registrants.component.html',
-  styleUrls: ['./registrants.component.scss'],
+  templateUrl: './men-registrants.component.html',
+  styleUrls: ['./men-registrants.component.scss'],
 })
-export class RegistrantsComponent implements OnInit {
+export class MenRegistrantsComponent implements OnInit {
   registrants!: Observable<Registrant[]>;
 
   constructor(private db: DbService) {
