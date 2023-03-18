@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Registrant } from '@models/registrant.model';
 import { DbService } from '@services/db.service';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class AllRegistrantsComponent implements OnInit {
   registrants!: Observable<Registrant[]>;
 
-  constructor(private db: DbService) {
+  constructor(private db: DbService, private renderer: Renderer2) {
     this.registrants = this.db.oGetRegistrants();
   }
 
@@ -19,5 +19,12 @@ export class AllRegistrantsComponent implements OnInit {
 
   identify(index: number, item: any): number {
     return item.created_at;
+  }
+
+  copyToClipboard(phone: number, cellClass: string): void {
+    navigator.clipboard.writeText(phone.toString());
+    const element = document.getElementById(cellClass);
+
+    this.renderer.addClass(element, 'phone-copied');
   }
 }

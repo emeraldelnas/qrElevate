@@ -33,12 +33,24 @@
           <td style="text-align: center">
             {{ r.birthdate | age }}
           </td>
-          <td style="text-align: center">
+          <td
+            [id]="'reg-' + i"
+            style="display: flex; gap: 1rem; justify-content: center"
+          >
             <a [href]="'tel:' + r.mobile">
-              {{ r.mobile.toString() | slice : 0 : 4 }}-{{
-                r.mobile.toString() | slice : 4 : 7
-              }}-{{ r.mobile.toString() | slice : 7 : 11 }}
+              {{ r.mobile.toString() | slice : 0 : 4 }}
+              {{ r.mobile.toString() | slice : 4 : 7 }}
+              {{ r.mobile.toString() | slice : 7 : 11 }}
             </a>
+            <button
+              nbButton
+              outline
+              status="primary"
+              size="tiny"
+              (click)="copyToClipboard(r.mobile, 'reg-' + i)"
+            >
+              Copy
+            </button>
           </td>
           <!-- <td style="text-transform: capitalize; padding-right: 2rem">
             {{ r.school || "" }}
