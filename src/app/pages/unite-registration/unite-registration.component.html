@@ -1,0 +1,301 @@
+<div class="top">
+  <img src="../../../assets/elevate-logo-white.svg" alt="Elevate Logo" />
+</div>
+
+<nb-card
+  [nbSpinner]="isLoading"
+  nbSpinnerStatus="danger"
+  nbSpinnerSize="large"
+  nbSpinnerMessage="Loading..."
+  class="register-container"
+>
+  <nb-card-body>
+    <form
+      *ngIf="!generateQR"
+      class="registration-form"
+      [formGroup]="registerForm"
+      (ngSubmit)="submit()"
+    >
+      <div class="unite-logo">
+        <img src="../../../assets/unite-2023-logo.png" alt="UNITE 2023 Logo" />
+      </div>
+      <div class="title">
+        <h1>ELEVATE CDO UNITE 2023</h1>
+        <h2>Registration</h2>
+      </div>
+      <div class="form-control">
+        <label for="first-name" class="label">First Name *</label>
+        <input
+          formControlName="firstName"
+          name="first-name"
+          id="first-name"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="First Name"
+          class="capitalize"
+          autocomplete="off"
+        />
+        <div *ngIf="showError(firstName)">
+          <div
+            *ngIf="(firstName?.errors)!['required']"
+            class="invalid-feedback"
+          >
+            Please enter your first name.
+          </div>
+        </div>
+      </div>
+      <div class="form-control">
+        <label for="last-name" class="label">Last Name *</label>
+        <input
+          formControlName="lastName"
+          name="last-name"
+          id="last-name"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Last Name"
+          class="capitalize"
+          autocomplete="off"
+        />
+        <div *ngIf="showError(lastName)">
+          <div *ngIf="(lastName?.errors)!['required']" class="invalid-feedback">
+            Please enter your last name.
+          </div>
+        </div>
+      </div>
+      <div class="form-control">
+        <label for="mobile" class="label">Mobile *</label>
+        <input
+          formControlName="mobile"
+          name="mobile"
+          id="mobile"
+          type="tel"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Mobile"
+          maxlength="11"
+          autocomplete="off"
+        />
+        <div *ngIf="showError(mobile)">
+          <div *ngIf="(mobile?.errors)!['required']" class="invalid-feedback">
+            Please enter your mobile number.
+          </div>
+        </div>
+      </div>
+
+      <!-- AUTO SELECT -->
+      <div class="form-control">
+        <div style="display: flex; justify-content: space-between">
+          <label for="school" class="label">School *</label>
+          <small
+            ><strong
+              >Select "Other" if you can't find your school</strong
+            ></small
+          >
+        </div>
+        <input
+          formControlName="school"
+          name="school"
+          id="school"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          type="text"
+          placeholder="Select School"
+          [nbAutocomplete]="auto"
+        />
+        <div *ngIf="showError(school)">
+          <div *ngIf="(school?.errors)!['required']" class="invalid-feedback">
+            Please select your school.
+          </div>
+        </div>
+
+        <nb-autocomplete #auto>
+          <nb-option-group
+            *ngFor="let group of filteredGroups$ | async; trackBy: trackByFn"
+            [title]="group.name"
+          >
+            <nb-option *ngFor="let option of group.children" [value]="option">
+              {{ option }}
+            </nb-option>
+          </nb-option-group>
+        </nb-autocomplete>
+      </div>
+
+      <div class="form-control">
+        <label for="birthdate" class="label">Birthdate *</label>
+        <input
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Pick Date"
+          id="birthdate"
+          [nbDatepicker]="dateTimePicker"
+          formControlName="birthdate"
+          autocomplete="off"
+        />
+        <div *ngIf="showError(birthdate)">
+          <div
+            *ngIf="(birthdate?.errors)!['required']"
+            class="invalid-feedback"
+          >
+            Please enter your birth date.
+          </div>
+        </div>
+        <nb-datepicker #dateTimePicker></nb-datepicker>
+      </div>
+      <div class="form-control">
+        <label class="label" for="sex">Sex *</label>
+        <nb-radio-group class="sex-options" formControlName="sex" name="sex">
+          <nb-radio *ngFor="let option of sexOptions" [value]="option.value">{{
+            option.label
+          }}</nb-radio>
+        </nb-radio-group>
+        <div *ngIf="showError(sex)">
+          <div *ngIf="(sex?.errors)!['required']" class="invalid-feedback">
+            Please input your sex.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-control" style="margin-top: 1.5rem">
+        <nb-checkbox formControlName="isFirstTimer"
+          >FIRST time joining an Elevate event?</nb-checkbox
+        >
+      </div>
+      <!-- <div class="form-control">
+        <label for="school" class="label">School *</label>
+        <input
+          formControlName="school"
+          name="school"
+          id="school"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="School"
+          class="capitalize"
+        />
+        <div *ngIf="showError(school)">
+          <div *ngIf="(school?.errors)!['required']" class="invalid-feedback">
+            Please enter your school.
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="form-control">
+        <label for="invitedBy" class="label"
+          >Invited by <small>(Leave blank if none)</small></label
+        >
+        <input
+          formControlName="invitedBy"
+          name="invitedBy"
+          id="invitedBy"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Invited by"
+          class="capitalize"
+        />
+      </div>
+
+
+
+
+
+
+
+      <div class="form-control">
+        <label for="leader" class="label"
+          >Small Group Leader <small>(Leave blank if none)</small></label
+        >
+        <input
+          formControlName="leader"
+          name="leader"
+          id="leader"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Leader"
+          class="capitalize"
+        />
+      </div> -->
+
+      <div style="text-align: right; margin-top: 2rem">
+        <button [disabled]="registerForm.invalid" nbButton status="primary">
+          REGISTER
+        </button>
+      </div>
+    </form>
+
+    <div class="qrcodeImage" id="qr-image">
+      <div *ngIf="generateQR">
+        <div class="unite-logo" style="margin-bottom: 2rem">
+          <img
+            src="../../../assets/unite-2023-logo.png"
+            alt="UNITE 2023 Logo"
+          />
+        </div>
+
+        <div class="congrats">
+          <p>You've been successfully registered! 😁🙌</p>
+          <strong
+            >Save your QR Code below by clicking the download button or by
+            taking a screenshot. 📱</strong
+          >
+          <br />
+          <strong>
+            Make sure to bring it on the event to claim your snacks! 😊
+          </strong>
+        </div>
+
+        <div *ngIf="district !== 'OTHER'" class="district">
+          <p>
+            You belong to
+            <strong
+              [ngClass]="{
+                central: district === 'CENTRAL',
+                east: district === 'EAST',
+                west: district === 'WEST'
+              }"
+              >{{ district }}</strong
+            >
+            District! 🌟
+          </p>
+        </div>
+
+        <qrcode
+          #qrImage
+          [qrdata]="qrData"
+          [allowEmptyString]="true"
+          [ariaLabel]="'Elevate QR Code'"
+          [cssClass]="'center'"
+          [colorDark]="'#000000'"
+          [colorLight]="'#ffffff'"
+          [elementType]="'canvas'"
+          [errorCorrectionLevel]="'M'"
+          [imageSrc]="qrIcon"
+          [imageHeight]="qrLogo"
+          [imageWidth]="qrLogo"
+          [margin]="4"
+          [scale]="2"
+          [width]="qrImgWidth"
+          [title]="'A custom title attribute'"
+        ></qrcode>
+        <div class="qrcode-screen-btns">
+          <button nbButton status="primary" (click)="saveAsImage(qrImage)">
+            <nb-icon icon="download"></nb-icon>
+            Download Your QR Code
+          </button>
+          <button nbButton ghost (click)="back()">Go Back</button>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

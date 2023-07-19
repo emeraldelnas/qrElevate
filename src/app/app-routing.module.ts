@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllRegistrantsComponent } from './pages/all-registrants/all-registrants.component';
 import { MenRegistrantsComponent } from './pages/men-registrants/men-registrants.component';
+import { UniteRegistrationComponent } from './pages/unite-registration/unite-registration.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'scanner' },
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'men-registrants',
     component: MenRegistrantsComponent,
+  },
+  {
+    path: 'unite2023',
+    component: UniteRegistrationComponent,
   },
 ];
 

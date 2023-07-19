@@ -10,7 +10,7 @@ import {
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
 import { Attendee } from '@models/attendee.model';
-import { Registrant } from '@models/registrant.model';
+import { Registrant, UniteRegistrant } from '@models/registrant.model';
 import firebase from 'firebase/compat/app';
 import { lastValueFrom, map, Observable, take } from 'rxjs';
 
@@ -267,5 +267,35 @@ export class DbService {
       .doc('Y0eOmtUxabBZLXY18xWX')
       .collection(this.currentDay)
       .doc(registrantId);
+  }
+
+  // UNITE
+
+  addUniteRegistrant(registrant: UniteRegistrant): Promise<any> {
+    // const res = await this.registrantAlreadyExists(registrant.mobile);
+
+    // if (!res) {
+    return this.afs
+      .collection('uniteregistrants')
+      .add({ ...registrant, created_at: this.timestamp });
+
+    // }
+
+    //
+  }
+
+  incrementUniteRegistrantTotals(registrant: UniteRegistrant): void {
+    const maleIncrement = registrant.sex === 'male' ? 1 : 0;
+    const femaleIncrement = registrant.sex === 'female' ? 1 : 0;
+
+    this.afs
+      .collection('uniteregistrants')
+      .doc('totals')
+      .update({
+        ['totalRegistrants']: firebase.firestore.FieldValue.increment(1),
+        ['totalMale']: firebase.firestore.FieldValue.increment(maleIncrement),
+        ['totalFemale']:
+          firebase.firestore.FieldValue.increment(femaleIncrement),
+      });
   }
 }

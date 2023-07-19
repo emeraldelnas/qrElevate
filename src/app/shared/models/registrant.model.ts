@@ -10,3 +10,14 @@ export interface Registrant {
   signature: string;
   isFirstTimer: boolean;
 }
+
+export interface UniteRegistrant {
+  lastName: string;
+  firstName: string;
+  mobile: number;
+  birthdate: string;
+  sex: string;
+  school?: string;
+  district?: string;
+  claimedFood: boolean;
+}

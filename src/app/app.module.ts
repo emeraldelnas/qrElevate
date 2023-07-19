@@ -21,6 +21,7 @@ import {
   NbToastrModule,
   NbUserModule,
   NbCheckboxModule,
+  NbAutocompleteModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -41,6 +42,7 @@ import { RecordsComponent } from './pages/records/records.component';
 import { MenRegistrantsComponent } from './pages/men-registrants/men-registrants.component';
 import { AllRegistrantsComponent } from './pages/all-registrants/all-registrants.component';
 import { AgePipe } from './shared/pipes/age.pipe';
+import { UniteRegistrationComponent } from './pages/unite-registration/unite-registration.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { AgePipe } from './shared/pipes/age.pipe';
     MenRegistrantsComponent,
     AllRegistrantsComponent,
     AgePipe,
+    UniteRegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { AgePipe } from './shared/pipes/age.pipe';
     NbButtonModule,
     NbListModule,
     NbSpinnerModule,
+    NbAutocompleteModule,
     ZXingScannerModule,
     AngularSignaturePadModule,
     QRCodeModule,
