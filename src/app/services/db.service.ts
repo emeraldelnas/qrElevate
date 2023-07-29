@@ -79,6 +79,23 @@ export class DbService {
       );
   }
 
+  oGetUniteRegistrants(): Observable<UniteRegistrant[]> {
+    return this.afs
+      .collection('uniteregistrants', (ref) => {
+        return ref.orderBy('created_at', 'asc');
+      })
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data = a.payload.doc.data() as UniteRegistrant;
+            const id = a.payload.doc.id;
+            return { docId: id, ...data };
+          })
+        )
+      );
+  }
+
   // oGetTodayAttendees(): Observable<any> {
   //   return this.afs
   //     .collection('attendees')

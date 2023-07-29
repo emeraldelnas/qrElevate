@@ -25,6 +25,6 @@ export class AllRegistrantsComponent implements OnInit {
     navigator.clipboard.writeText(phone.toString());
     const element = document.getElementById(cellClass);
 
-    this.renderer.addClass(element, 'phone-copied');
+    this.renderer.addClass(element, 'copied');
   }
 }

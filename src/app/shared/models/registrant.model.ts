@@ -12,12 +12,14 @@ export interface Registrant {
 }
 
 export interface UniteRegistrant {
-  lastName: string;
+  docId?: string;
   firstName: string;
+  lastName: string;
   mobile: number;
   birthdate: string;
   sex: string;
   school?: string;
   district?: string;
+  isFirstTimer?: boolean;
   claimedFood: boolean;
 }

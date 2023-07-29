@@ -1,4 +1,4 @@
-import { take, Subscription } from 'rxjs';
+import { take, Subscription, Subject, takeUntil, switchMap, tap } from 'rxjs';
 import { AttendeeDialogComponent } from './attendee-dialog/attendee-dialog.component';
 import { DbService } from '@services/db.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -23,6 +23,8 @@ export class ScannerComponent implements OnInit, OnDestroy {
   getRegistrant$!: Subscription;
   attendeeDialog$!: Subscription;
 
+  private ngUnsubscribe = new Subject<void>();
+
   isBirthdayToday = false;
 
   constructor(private db: DbService, private dialogService: NbDialogService) {}
@@ -36,14 +38,14 @@ export class ScannerComponent implements OnInit, OnDestroy {
         this.findAttendee$ = this.db
           .findAttendee(resultString)
           .get()
-          .pipe(take(1))
+          .pipe(take(1), takeUntil(this.ngUnsubscribe))
           .subscribe((attendee) => {
             this.oldResult = resultString;
 
             if (!attendee.exists) {
               this.getRegistrant$ = this.db
                 .getRegistrant(resultString)
-                .pipe(take(1))
+                .pipe(take(1), takeUntil(this.ngUnsubscribe))
                 .subscribe((res) => {
                   if (res.firstName) {
                     const birthdate = dayjs(res.birthdate);
@@ -96,6 +98,89 @@ export class ScannerComponent implements OnInit, OnDestroy {
     }
   }
 
+  // onCodeResult(resultString: string) {
+  //   if (!this.pauseScanner) {
+  //     this.pauseScanner = true;
+  //     if (resultString !== this.oldResult) {
+  //       this.findAttendee$ = this.db
+  //         .findAttendee(resultString)
+  //         .get()
+  //         .pipe(
+  //           take(1),
+  //           takeUntil(this.ngUnsubscribe),
+  //           switchMap((attendee) => {
+  //             this.oldResult = resultString;
+  //             if (!attendee.exists) {
+  //               return this.db.getRegistrant(resultString).pipe(
+  //                 take(1),
+  //                 tap((res) => {
+  //                   if (!res.firstName) {
+  //                     this.showAlreadyScanned = false;
+  //                     this.showNotRegistered = true;
+  //                   }
+  //                 }),
+  //                 switchMap((res) => {
+  //                   if (res.firstName) {
+  //                     const birthdate = dayjs(res.birthdate);
+  //                     const age = dayjs().diff(birthdate, 'year');
+  //                     this.isBirthdayToday = this.isToday(birthdate);
+
+  //                     const attendeeData = {
+  //                       age,
+  //                       firstName: res.firstName,
+  //                       lastName: res.lastName,
+  //                       sex: res.sex,
+  //                       school: res.school || '',
+  //                       invitedBy: res.invitedBy || '',
+  //                       isFirstTimer: res.isFirstTimer,
+  //                     };
+
+  //                     return this.dialogService
+  //                       .open(AttendeeDialogComponent, {
+  //                         context: {
+  //                           attendee: {
+  //                             ...res,
+  //                             birthdate: birthdate.format('MMM D, YYYY'),
+  //                           },
+  //                           age,
+  //                           isBirthdayToday: this.isBirthdayToday,
+  //                         },
+  //                       })
+  //                       .onClose.pipe(
+  //                         tap(() => {
+  //                           this.pauseScanner = false;
+  //                         }),
+  //                         switchMap(() => {
+  //                           return this.db.addAttendee(
+  //                             resultString,
+  //                             attendeeData
+  //                           );
+  //                         }),
+  //                         tap(() => {
+  //                           this.db.incrementAttendeesTotals(
+  //                             attendeeData,
+  //                             resultString
+  //                           );
+  //                         })
+  //                       );
+  //                   } else {
+  //                     return [];
+  //                   }
+  //                 })
+  //               );
+  //             } else {
+  //               return [];
+  //             }
+  //           })
+  //         )
+  //         .subscribe();
+  //     } else {
+  //       this.showNotRegistered = false;
+  //       this.showAlreadyScanned = true;
+  //     }
+  //   }
+  // }
+
   hideAlreadyScanned(): void {
     this.showAlreadyScanned = false;
     this.pauseScanner = false;
@@ -116,6 +201,9 @@ export class ScannerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+
     this.findAttendee$.unsubscribe();
     this.getRegistrant$.unsubscribe();
     this.attendeeDialog$.unsubscribe();

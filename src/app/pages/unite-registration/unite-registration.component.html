@@ -77,7 +77,6 @@
           fullWidth
           shape="semi-round"
           placeholder="Mobile"
-          maxlength="11"
           autocomplete="off"
         />
         <div *ngIf="showError(mobile)">
@@ -87,8 +86,35 @@
         </div>
       </div>
 
-      <!-- AUTO SELECT -->
+      <!-- SELECT SCHOOL -->
+
       <div class="form-control">
+        <div style="display: flex; justify-content: space-between">
+          <label for="school" class="label">School *</label>
+          <small
+            ><strong
+              >Select "Other" if you can't find your school</strong
+            ></small
+          >
+        </div>
+        <nb-select
+          [formControl]="school"
+          fullWidth=""
+          shape="semi-round"
+          placeholder="Select School"
+        >
+          <nb-option-group *ngFor="let school of schools" [title]="school.name">
+            <nb-option
+              *ngFor="let schoolOption of school.children"
+              [value]="schoolOption"
+              >{{ schoolOption }}</nb-option
+            >
+          </nb-option-group>
+        </nb-select>
+      </div>
+
+      <!-- AUTO SELECT -->
+      <!-- <div class="form-control">
         <div style="display: flex; justify-content: space-between">
           <label for="school" class="label">School *</label>
           <small
@@ -105,7 +131,7 @@
           fullWidth
           shape="semi-round"
           type="text"
-          placeholder="Select School"
+          placeholder="Select your School from the list"
           [nbAutocomplete]="auto"
         />
         <div *ngIf="showError(school)">
@@ -124,7 +150,7 @@
             </nb-option>
           </nb-option-group>
         </nb-autocomplete>
-      </div>
+      </div> -->
 
       <div class="form-control">
         <label for="birthdate" class="label">Birthdate *</label>
@@ -228,7 +254,11 @@
       </div> -->
 
       <div style="text-align: right; margin-top: 2rem">
-        <button [disabled]="registerForm.invalid" nbButton status="primary">
+        <button
+          [disabled]="registerForm.invalid || isLoading"
+          nbButton
+          status="primary"
+        >
           REGISTER
         </button>
       </div>

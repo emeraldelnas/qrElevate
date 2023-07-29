@@ -33,6 +33,11 @@ const routes: Routes = [
     path: 'unite2023',
     component: UniteRegistrationComponent,
   },
+  {
+    path: 'unite-dashboard',
+    loadChildren: () =>
+      import('./pages/unite/unite.module').then((m) => m.UniteModule),
+  },
 ];
 
 @NgModule({

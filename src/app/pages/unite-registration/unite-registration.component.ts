@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
   ValidationErrors,
+  FormControl,
 } from '@angular/forms';
 import { DbService } from '@services/db.service';
 import { QRCodeComponent } from 'angularx-qrcode';
@@ -53,6 +54,7 @@ export class UniteRegistrationComponent implements OnInit {
 
   district: District = 'OTHER';
   schools!: Group[];
+  // availableSchools: string[] = [];
   filteredGroups$!: Observable<Group[]>;
 
   constructor(private fb: FormBuilder, private db: DbService) {}
@@ -113,6 +115,34 @@ export class UniteRegistrationComponent implements OnInit {
       },
     ];
 
+    // this.availableSchools = [
+    //   'Xavier University - Ateneo de Cagayan',
+    //   'Lourdes College',
+    //   'Pilgrim College',
+    //   'Misamis Oriental General Comprehensive High School',
+    //   "Abba's Orchard",
+    //   'Oro Christian Grace School',
+    //   'Corpus Christi',
+    //   'University of Science and Technology of Southern Philippines',
+    //   'Southern Philippine College',
+    //   'Capitol University',
+    //   'East City Central School',
+    //   'Lapasan National High School',
+    //   'Regional Science High School',
+    //   'Pedro "Oloy" N. Roa Sr. Elementary School',
+    //   'Pedro "Oloy" N. Roa Sr. High School',
+    //   'Liceo de Cagayan University',
+    //   'Cagayan de Oro College - PHINMA Education Network',
+    //   "St. Mary's Academy",
+    //   'Angelicum Learning Center',
+    //   'Informatics College',
+    //   'Gusa National High School',
+    //   'West City Central School',
+    //   'Golden Heritage School',
+    //   'Mindanao State University - Iligan Institute of Technology',
+    //   'Philippine Science High School',
+    // ];
+
     this.filteredGroups$ = of(this.schools);
 
     this.filteredGroups$ = this.school.valueChanges.pipe(
@@ -159,14 +189,24 @@ export class UniteRegistrationComponent implements OnInit {
         district: this.district,
       };
 
-      this.db.addUniteRegistrant(payload).then((docRef) => {
-        this.isLoading = false;
-        this.generateQR = true;
-        this.qrData = docRef.id;
+      this.db
+        .addUniteRegistrant(payload)
+        .then((docRef) => {
+          this.isLoading = false;
+          this.generateQR = true;
+          this.qrData = docRef.id;
 
-        this.db.incrementUniteRegistrantTotals(payload);
-        // this.isUserCreated = true;
-      });
+          // this.db.incrementUniteRegistrantTotals(payload);
+          // this.isUserCreated = true;
+        })
+        .catch((e: Error) => {
+          console.log(e);
+          this.isLoading = false;
+          this.generateQR = false;
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
     }
   }
 
@@ -230,28 +270,28 @@ export class UniteRegistrationComponent implements OnInit {
     this.registerForm.reset();
   }
 
-  get firstName(): AbstractControl {
-    return <AbstractControl>this.registerForm.get('firstName');
+  get firstName(): FormControl {
+    return <FormControl>this.registerForm.get('firstName');
   }
 
-  get lastName(): AbstractControl {
-    return <AbstractControl>this.registerForm.get('lastName');
+  get lastName(): FormControl {
+    return <FormControl>this.registerForm.get('lastName');
   }
 
-  get mobile(): AbstractControl {
-    return <AbstractControl>this.registerForm.get('mobile');
+  get mobile(): FormControl {
+    return <FormControl>this.registerForm.get('mobile');
   }
 
-  get sex(): AbstractControl {
-    return <AbstractControl>this.registerForm.get('sex');
+  get sex(): FormControl {
+    return <FormControl>this.registerForm.get('sex');
   }
 
-  get birthdate(): AbstractControl {
-    return <AbstractControl>this.registerForm.get('birthdate');
+  get birthdate(): FormControl {
+    return <FormControl>this.registerForm.get('birthdate');
   }
 
-  get school(): AbstractControl {
-    return <AbstractControl>this.registerForm.get('school');
+  get school(): FormControl {
+    return <FormControl>this.registerForm.get('school');
   }
 
   private filterChildren(children: string[], filterValue: string) {
