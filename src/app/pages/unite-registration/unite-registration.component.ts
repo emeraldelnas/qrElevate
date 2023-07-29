@@ -17,7 +17,7 @@ export interface Group {
   children: string[];
 }
 
-type District = 'OTHER' | 'CENTRAL' | 'EAST' | 'WEST';
+type District = 'OTHER' | 'CENTRAL' | 'EAST' | 'WEST' | 'HIGH';
 
 @Component({
   selector: 'app-unite-registration',
@@ -38,6 +38,7 @@ export class UniteRegistrationComponent implements OnInit {
   centralIcon = './assets/central-district.png';
   eastIcon = './assets/east-district.png';
   westIcon = './assets/west-district.png';
+  highIcon = './assets/high-district.png';
   othersIcon = './assets/others-district.png';
   qrIcon = this.defaultIcon;
 
@@ -79,10 +80,6 @@ export class UniteRegistrationComponent implements OnInit {
           'Xavier University - Ateneo de Cagayan',
           'Lourdes College',
           'Pilgrim College',
-          'Misamis Oriental General Comprehensive High School',
-          "Abba's Orchard",
-          'Oro Christian Grace School',
-          'Corpus Christi',
         ],
       },
       {
@@ -91,25 +88,35 @@ export class UniteRegistrationComponent implements OnInit {
           'University of Science and Technology of Southern Philippines',
           'Southern Philippine College',
           'Capitol University',
-          'East City Central School',
-          'Lapasan National High School',
-          'Regional Science High School',
         ],
       },
       {
         name: 'WEST',
         children: [
-          'Pedro "Oloy" N. Roa Sr. Elementary School',
-          'Pedro "Oloy" N. Roa Sr. High School',
           'Liceo de Cagayan University',
           'Cagayan de Oro College - PHINMA Education Network',
-          "St. Mary's Academy",
-          'Angelicum Learning Center',
           'Informatics College',
-          'Gusa National High School',
-          'West City Central School',
           'Golden Heritage School',
           'Mindanao State University - Iligan Institute of Technology',
+        ],
+      },
+      {
+        name: 'HIGH',
+        children: [
+          "Abba's Orchard",
+          'Oro Christian Grace School',
+          'Corpus Christi',
+          'Regional Science High School',
+          'East City Central School',
+          'Lapasan National High School',
+          'Angelicum Learning Center',
+          "St. Mary's Academy",
+          'Misamis Oriental General Comprehensive High School',
+          'Pedro "Oloy" N. Roa Sr. Elementary School',
+          'Pedro "Oloy" N. Roa Sr. High School',
+          'Gusa National High School',
+          'Cagayan de Oro Nation High School',
+          'West City Central School',
           'Philippine Science High School',
         ],
       },
@@ -346,6 +353,9 @@ export class UniteRegistrationComponent implements OnInit {
 
       case 'WEST':
         return this.westIcon;
+
+      case 'HIGH':
+        return this.highIcon;
 
       case 'OTHER':
         return this.othersIcon;
