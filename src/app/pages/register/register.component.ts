@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
     const d1 = dayjs('1998-01-08T16:00:00.000Z');
     const d2 = dayjs();
-    console.log(d2.diff(d1, 'year'));
+    // console.log(d2.diff(d1, 'year'));
   }
 
   ngAfterViewInit() {
@@ -197,13 +197,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   formatDate(dateString: string): string {
-    console.log(
-      new Date(dateString).toLocaleDateString('en-us', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      })
-    );
+    // console.log(
+    //   new Date(dateString).toLocaleDateString('en-us', {
+    //     month: 'long',
+    //     day: 'numeric',
+    //     year: 'numeric',
+    //   })
+    // );
     return new Date(dateString).toLocaleDateString('en-us', {
       month: 'long',
       day: 'numeric',

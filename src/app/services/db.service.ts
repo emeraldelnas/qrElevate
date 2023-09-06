@@ -9,7 +9,7 @@ import {
   AngularFireStorage,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
-import { Attendee } from '@models/attendee.model';
+import { Attendee, UniteAttendee } from '@models/attendee.model';
 import { Registrant, UniteRegistrant } from '@models/registrant.model';
 import firebase from 'firebase/compat/app';
 import { lastValueFrom, map, Observable, take } from 'rxjs';
@@ -25,6 +25,8 @@ export class DbService {
 
   uploadPercent!: Observable<number>;
   downloadUrl!: Observable<string>;
+
+  isUniteDayExistChecked = false;
 
   constructor(
     private afs: AngularFirestore,
@@ -286,7 +288,35 @@ export class DbService {
       .doc(registrantId);
   }
 
-  // UNITE
+  // UNITE /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  getUniteDayTotals(
+    selectedDay = this.currentDay
+  ): Observable<AttendeesTotals> {
+    return this.afs
+      .collection('uniteattendees')
+      .doc('sG5JbulSG3yfuGPiAVhB')
+      .collection(selectedDay)
+      .doc('totals')
+      .valueChanges()
+      .pipe(
+        map((data) => {
+          return data as AttendeesTotals;
+        })
+      );
+  }
+
+  oGetUniteAttendeesSpecificDay(
+    selectedDay = this.currentDay
+  ): Observable<any> {
+    return this.afs
+      .collection('uniteattendees')
+      .doc('sG5JbulSG3yfuGPiAVhB')
+      .collection(selectedDay, (ref) => {
+        return ref.orderBy('lastName', 'asc');
+      })
+      .valueChanges();
+  }
 
   addUniteRegistrant(registrant: UniteRegistrant): Promise<any> {
     // const res = await this.registrantAlreadyExists(registrant.mobile);
@@ -301,6 +331,63 @@ export class DbService {
     //
   }
 
+  getUniteRegistrant(id: string): Observable<UniteRegistrant> {
+    const registrant = this.afs.doc<UniteRegistrant>('uniteregistrants/' + id);
+    return registrant.snapshotChanges().pipe(
+      map((changes) => {
+        const data = changes.payload.data();
+        const id = changes.payload.id;
+        return { id, ...data } as UniteRegistrant;
+      })
+    );
+  }
+
+  addUniteAttendee(id: string, attendee: UniteAttendee): Promise<void> {
+    const paylaod = { ...attendee, created_at: this.timestamp };
+    paylaod.created_at = this.timestamp;
+
+    return this.afs
+      .collection('uniteattendees')
+      .doc('sG5JbulSG3yfuGPiAVhB')
+      .collection(this.currentDay)
+      .doc(id)
+      .set(paylaod);
+  }
+
+  findUniteAttendee(
+    registrantId: string
+  ): AngularFirestoreDocument<DocumentData> {
+    return this.afs
+      .collection('uniteattendees')
+      .doc('sG5JbulSG3yfuGPiAVhB')
+      .collection(this.currentDay)
+      .doc(registrantId);
+  }
+
+  getUniteAttendee(id: string): Observable<UniteAttendee> {
+    const registrant = this.afs.doc<UniteRegistrant>(
+      `uniteattendees/sG5JbulSG3yfuGPiAVhB/${this.currentDay}/` + id
+    );
+    return registrant.snapshotChanges().pipe(
+      map((changes) => {
+        const data = changes.payload.data();
+        const id = changes.payload.id;
+        return { id, ...data } as UniteAttendee;
+      })
+    );
+  }
+
+  async attendeeClaimedFood(registrantId: string): Promise<void> {
+    this.afs
+      .collection('uniteattendees')
+      .doc('sG5JbulSG3yfuGPiAVhB')
+      .collection(this.currentDay)
+      .doc(registrantId)
+      .update({
+        ['claimedFood']: true,
+      });
+  }
+
   incrementUniteRegistrantTotals(registrant: UniteRegistrant): void {
     const maleIncrement = registrant.sex === 'male' ? 1 : 0;
     const femaleIncrement = registrant.sex === 'female' ? 1 : 0;
@@ -313,6 +400,59 @@ export class DbService {
         ['totalMale']: firebase.firestore.FieldValue.increment(maleIncrement),
         ['totalFemale']:
           firebase.firestore.FieldValue.increment(femaleIncrement),
+      });
+  }
+
+  async checkIfUniteDayExists(): Promise<boolean> {
+    const doesMonthExist$ = this.afs
+      .collection('uniteattendees')
+      .doc('sG5JbulSG3yfuGPiAVhB')
+      .collection(this.currentDay, (ref) => ref.limit(1))
+      .get();
+    const doesMonthExist = await lastValueFrom(doesMonthExist$);
+    return doesMonthExist.empty;
+  }
+
+  async createUniteCurrentDayAttendeesTotalsDB(): Promise<void> {
+    if (await this.checkIfUniteDayExists()) {
+      return this.afs
+        .collection('uniteattendees')
+        .doc('sG5JbulSG3yfuGPiAVhB')
+        .collection(this.currentDay)
+        .doc('totals')
+        .set({});
+    }
+  }
+
+  incrementUniteAttendeesTotals(attendee: UniteAttendee, docId: string): void {
+    const isFirstTimer = attendee.isFirstTimer ? 1 : 0;
+    const maleIncrement = attendee.sex === 'male' ? 1 : 0;
+    const maleFirstTimerIncrement =
+      attendee.sex === 'male' && attendee.isFirstTimer ? 1 : 0;
+    const femaleIncrement = attendee.sex === 'female' ? 1 : 0;
+    const femaleFirstTimerIncrement =
+      attendee.sex === 'female' && attendee.isFirstTimer ? 1 : 0;
+    this.afs
+      .collection('uniteattendees')
+      .doc('sG5JbulSG3yfuGPiAVhB')
+      .collection(this.currentDay)
+      .doc('totals')
+      .update({
+        ['totalAttendees']: firebase.firestore.FieldValue.increment(1),
+        ['totalFirstTimers']:
+          firebase.firestore.FieldValue.increment(isFirstTimer),
+        ['totalMale']: firebase.firestore.FieldValue.increment(maleIncrement),
+        ['totalMaleFirstTimers']: firebase.firestore.FieldValue.increment(
+          maleFirstTimerIncrement
+        ),
+        ['totalFemale']:
+          firebase.firestore.FieldValue.increment(femaleIncrement),
+        ['totalFemaleFirstTimers']: firebase.firestore.FieldValue.increment(
+          femaleFirstTimerIncrement
+        ),
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }
 }

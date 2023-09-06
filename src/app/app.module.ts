@@ -23,6 +23,8 @@ import {
   NbCheckboxModule,
   NbAutocompleteModule,
   NbSelectModule,
+  NbSidebarModule,
+  NbMenuModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -71,6 +73,8 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
     NbEvaIconsModule,
     NbCheckboxModule,
     NbIconModule,

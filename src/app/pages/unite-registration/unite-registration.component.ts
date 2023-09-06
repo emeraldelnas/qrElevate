@@ -65,7 +65,7 @@ export class UniteRegistrationComponent implements OnInit {
 
     const d1 = dayjs('1998-01-08T16:00:00.000Z');
     const d2 = dayjs();
-    console.log(d2.diff(d1, 'year'));
+    // console.log(d2.diff(d1, 'year'));
 
     //
 
@@ -157,7 +157,7 @@ export class UniteRegistrationComponent implements OnInit {
       map((filterString) => this.filter(filterString))
     );
 
-    console.log(this.findDistrict("St. Mary's Academy"));
+    // console.log(this.findDistrict("St. Mary's Academy"));
   }
 
   ngAfterViewInit() {
@@ -257,13 +257,13 @@ export class UniteRegistrationComponent implements OnInit {
   }
 
   formatDate(dateString: string): string {
-    console.log(
-      new Date(dateString).toLocaleDateString('en-us', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      })
-    );
+    // console.log(
+    //   new Date(dateString).toLocaleDateString('en-us', {
+    //     month: 'long',
+    //     day: 'numeric',
+    //     year: 'numeric',
+    //   })
+    // );
     return new Date(dateString).toLocaleDateString('en-us', {
       month: 'long',
       day: 'numeric',

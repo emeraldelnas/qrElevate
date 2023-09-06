@@ -1,0 +1,42 @@
+<zxing-scanner
+  (scanSuccess)="onCodeResult($event)"
+  id="qr-scanner"
+></zxing-scanner>
+
+<div class="overlay">
+  <nb-card *ngIf="showSuccess">
+    <nb-card-body>
+      <div class="success-scanned">
+        <nb-icon status="success" icon="person-done-outline"></nb-icon>
+        <p>Successfully scanned!</p>
+        <button nbButton ghost size="small" (click)="hideSuccess()">
+          Okay
+        </button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card *ngIf="showAlreadyScanned">
+    <nb-card-body>
+      <div class="already-scanned">
+        <nb-icon status="warning" icon="person-done-outline"></nb-icon>
+        <p>Ooops... Already scanned.</p>
+        <button nbButton ghost size="small" (click)="hideAlreadyScanned()">
+          Okay
+        </button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card *ngIf="showNotAttended">
+    <nb-card-body>
+      <div class="not-registered">
+        <nb-icon status="danger" icon="person-delete-outline"></nb-icon>
+        <p>Not yet scanned as an Attendee.</p>
+        <button nbButton ghost size="small" (click)="hideNotAttended()">
+          Okay
+        </button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

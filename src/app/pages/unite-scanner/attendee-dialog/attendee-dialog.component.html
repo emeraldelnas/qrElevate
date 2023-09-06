@@ -1,0 +1,49 @@
+<nb-card class="card-container" (click)="close()">
+  <nb-card-body>
+    <nb-badge
+      [text]="attendee.district || ''"
+      [status]="
+        attendee.district == 'CENTRAL'
+          ? 'primary'
+          : attendee.district == 'EAST'
+          ? 'danger'
+          : attendee.district == 'WEST'
+          ? 'success'
+          : attendee.district == 'HIGH'
+          ? 'warning'
+          : 'basic'
+      "
+      position="top right"
+    ></nb-badge>
+    <div class="attendee-container">
+      <nb-icon
+        *ngIf="!isBirthdayToday"
+        [status]="attendee.sex === 'male' ? 'info' : 'danger'"
+        icon="person-outline"
+        id="attendee-icon"
+      ></nb-icon>
+
+      <nb-icon
+        *ngIf="isBirthdayToday"
+        status="success"
+        icon="gift"
+        id="attendee-icon"
+      ></nb-icon>
+
+      <div class="attendee-info">
+        <div class="name-div">
+          <p class="name">
+            {{ attendee.firstName }} {{ attendee.lastName }},
+            <small class="sex">{{ attendee.sex }}</small>
+          </p>
+        </div>
+        <p class="birthdate">
+          <span style="font-weight: 600">{{ age }}</span
+          >yrs old, {{ attendee.birthdate }}
+        </p>
+        <p class="mobile">{{ attendee.mobile }}</p>
+        <p class="school">{{ attendee.school }}</p>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

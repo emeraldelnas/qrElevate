@@ -9,12 +9,19 @@ import { GenerateQrCodeComponent } from './generate-qr-code/generate-qr-code.com
 import { FormsModule } from '@angular/forms';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
+  NbActionsModule,
+  NbButtonGroupModule,
   NbButtonModule,
   NbCardModule,
+  NbDatepickerModule,
   NbIconModule,
+  NbInputModule,
   NbLayoutModule,
+  NbMenuModule,
+  NbSidebarModule,
 } from '@nebular/theme';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -28,10 +35,17 @@ import { SharedModule } from 'src/app/shared/shared.module';
     UniteRoutingModule,
     FormsModule,
     NbLayoutModule,
+    NbSidebarModule,
+    NbMenuModule,
+    NbActionsModule,
     NbEvaIconsModule,
     NbIconModule,
     NbButtonModule,
+    NbButtonGroupModule,
     NbCardModule,
+    NbInputModule,
+    NbDatepickerModule,
+    QRCodeModule,
     SharedModule,
   ],
 })

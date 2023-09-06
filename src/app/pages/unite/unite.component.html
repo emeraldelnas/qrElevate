@@ -1,1 +1,30 @@
-<router-outlet></router-outlet>
+<nb-layout>
+  <nb-sidebar responsive>
+    <div style="margin-bottom: 2rem">
+      <img
+        style="width: 85%; height: auto; display: block; margin: auto"
+        src="../../../assets/unite-2023-logo.png"
+        alt="Elevate Logo"
+      />
+    </div>
+    <nb-menu [items]="items"></nb-menu>
+  </nb-sidebar>
+
+  <nb-layout-column style="padding-top: 0"
+    ><router-outlet></router-outlet
+  ></nb-layout-column>
+</nb-layout>
+
+<!-- <nb-layout>
+  <nb-layout-header fixed>
+    <h1>Elevate</h1>
+  </nb-layout-header>
+
+  <nb-sidebar
+    ><nb-card>
+      <nb-menu [items]="items"> </nb-menu> </nb-card
+  ></nb-sidebar>
+
+  <nb-layout-column><router-outlet></router-outlet
+  ></nb-layout-column>
+</nb-layout> -->

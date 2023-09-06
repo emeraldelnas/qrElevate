@@ -1,1 +1,54 @@
-<p>generate-qr-code works!</p>
+<nb-layout center>
+  <nb-layout-column style="padding-top: 0"
+    ><nb-card>
+      <nb-card-header>
+        <h4>Generate QR Code</h4>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="form-control">
+          <label style="display: block; margin-bottom: 0.5rem"
+            >Enter ID Code:</label
+          >
+          <input
+            [(ngModel)]="qrData"
+            type="text"
+            nbInput
+            fullWidth
+            autocomplete="off"
+            placeholder="Paste ID Code"
+          />
+        </div>
+
+        <div style="display: grid; place-content: center; margin-top: 2rem">
+          <nb-button-group (valueChange)="updateSingleSelectGroupValue($event)">
+            <button nbButtonToggle value="central">CENTRAL</button>
+            <button nbButtonToggle value="east">EAST</button>
+            <button nbButtonToggle value="west">WEST</button>
+            <button nbButtonToggle value="high">HIGH</button>
+            <button nbButtonToggle pressed value="other">OTHER</button>
+          </nb-button-group>
+        </div>
+
+        <qrcode
+          [hidden]="!qrData"
+          #qrImage
+          [qrdata]="qrData"
+          [allowEmptyString]="true"
+          [ariaLabel]="'Elevate QR Code'"
+          [cssClass]="'center'"
+          [colorDark]="'#000000'"
+          [colorLight]="'#ffffff'"
+          [elementType]="'canvas'"
+          [errorCorrectionLevel]="'M'"
+          [imageSrc]="qrIcon"
+          [imageHeight]="75"
+          [imageWidth]="75"
+          [margin]="4"
+          [scale]="2"
+          [width]="400"
+          [title]="'Code: ' + (qrData ? qrData : 'Empty')"
+        ></qrcode>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>
