@@ -4,6 +4,7 @@ import { UniteRegistrantsComponent } from './unite-registrants/unite-registrants
 import { UniteAttendeesComponent } from './unite-attendees/unite-attendees.component';
 import { GenerateQrCodeComponent } from './generate-qr-code/generate-qr-code.component';
 import { UniteComponent } from './unite.component';
+import { UniteRaffleEntriesComponent } from './unite-raffle-entries/unite-raffle-entries.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'generate-qr',
         component: GenerateQrCodeComponent,
+      },
+      {
+        path: 'raffle-entries',
+        component: UniteRaffleEntriesComponent,
       },
     ],
   },

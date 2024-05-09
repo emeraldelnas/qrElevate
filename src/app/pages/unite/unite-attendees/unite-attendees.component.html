@@ -4,7 +4,7 @@
 
 <nb-card class="records-container" style="margin-top: 3rem;">
   <nb-card-header>
-    <h4>Unite 2023 Attendees</h4>
+    <h4>Unite 2024 Attendees</h4>
   </nb-card-header>
   <nb-card-body>
     <div class="records-header">
@@ -84,6 +84,7 @@
             <th style="padding-right: 2rem">Phone No.</th>
             <th style="padding-right: 2rem">Ticket No.</th>
             <th>First-timer?</th>
+            <th></th>
           </tr>
           <tr
             *ngFor="
@@ -94,7 +95,7 @@
             [ngClass]="{ 'first-timer-row': attendee.isFirstTimer }"
           >
             <td class="count">{{ i + 1 }}</td>
-            <td style="padding-right: 2rem">
+            <td style="padding-right: 2rem; white-space: nowrap;">
               {{ attendee.lastName }}, {{ attendee.firstName }}
             </td>
             <td style="text-align: right; padding-right: 2rem">
@@ -109,12 +110,12 @@
             <td style="text-transform: capitalize; padding-right: 2rem">
               {{ attendee.district || "" }}
             </td>
-            <td style="text-transform: capitalize; padding-right: 2rem">
-              <ng-template *ngIf="attendee.facebookAcc">
+            <td style="text-transform: capitalize; padding-right: 2rem; white-space: nowrap;">
+              <ng-container *ngIf="attendee.facebookAcc">
                 {{ attendee.facebookAcc || "" }}
-              </ng-template>
+              </ng-container>
             </td>
-            <td [id]="'mob-' + i" style="text-transform: capitalize; padding-right: 2rem">
+            <td [id]="'mob-' + i" style="text-transform: capitalize; padding-right: 2rem; white-space: nowrap;">
               <div *ngIf="attendee.mobile" style="display: flex; gap: 1rem; justify-content: space-between; align-items: center;">
                 <a [href]="'tel:' + attendee.mobile">
                   {{ attendee.mobile.toString() | slice : 0 : 4 }}
@@ -137,6 +138,17 @@
             </td>
             <td [ngClass]="{ 'first-timer': attendee.isFirstTimer }">
               {{ attendee.isFirstTimer ? "✅ Yes" : "❌ No" }}
+            </td>
+            <td style="text-align: right;">
+              <button
+                nbButton
+                outline
+                status="danger"
+                size="tiny"
+                (click)="deleteUniteAttendee(attendee)"
+              >
+                Delete <nb-icon icon="trash-2"></nb-icon>
+              </button>
             </td>
           </tr>
         </table>

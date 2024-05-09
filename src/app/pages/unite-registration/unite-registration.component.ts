@@ -214,7 +214,6 @@ export class UniteRegistrationComponent implements OnInit {
 
       const { otherSchoolName, ...rest } = formValues;
 
-
       this.district = this.findDistrict(this.school.value);
       // this.qrIcon = this.getDistrictIcon(this.district);
 

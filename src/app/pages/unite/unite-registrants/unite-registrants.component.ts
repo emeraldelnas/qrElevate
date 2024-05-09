@@ -61,6 +61,5 @@ export class UniteRegistrantsComponent implements OnInit {
           this.db.deleteUniteRegistrant(registrant);
         }
       });
-
-    }
+  }
 }

@@ -13,6 +13,7 @@ import {
   NbButtonGroupModule,
   NbButtonModule,
   NbCardModule,
+  NbCheckboxModule,
   NbDatepickerModule,
   NbDialogModule,
   NbIconModule,
@@ -25,6 +26,7 @@ import {
 } from '@nebular/theme';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QRCodeModule } from 'angularx-qrcode';
+import { UniteRaffleEntriesComponent } from './unite-raffle-entries/unite-raffle-entries.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     UniteRegistrantsComponent,
     UniteAttendeesComponent,
     GenerateQrCodeComponent,
+    UniteRaffleEntriesComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     NbButtonGroupModule,
     NbCardModule,
     NbInputModule,
+    NbCheckboxModule,
     NbDatepickerModule,
     NbRouteTabsetModule,
     NbDialogModule.forChild(),

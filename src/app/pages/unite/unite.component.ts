@@ -43,6 +43,12 @@ export class UniteComponent implements OnInit {
       route: '/unite-dashboard/generate-qr',
       icon: 'image-2',
       responsive: true,
+    },
+    {
+      title: 'Raffle Entries',
+      route: '/unite-dashboard/raffle-entries',
+      icon: 'list',
+      responsive: true,
     }
   ];
 

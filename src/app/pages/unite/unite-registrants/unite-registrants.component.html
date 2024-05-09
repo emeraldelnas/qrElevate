@@ -36,6 +36,7 @@
           <th style="text-align: center">Gender</th>
           <th>School</th>
           <th>District</th>
+          <th>FB Name</th>
           <th>Phone No.</th>
           <th>Ticket No.</th>
           <th>Registered On</th>
@@ -71,6 +72,9 @@
           </td>
           <td>
             {{ r.district }}
+          </td>
+          <td>
+            {{ r.facebookAcc }}
           </td>
           <td [id]="'mob-' + i">
             <div style="display: flex; gap: 1rem; justify-content: space-between; align-items: center;">
@@ -128,7 +132,7 @@
                 (click)="deleteUniteRegistrant(r)"
               >
                 Delete <nb-icon icon="trash-2"></nb-icon>
-              </button>
+            </button>
           </td>
           <!-- <td style="text-transform: capitalize; padding-right: 2rem">
             {{ r.school || "" }}
