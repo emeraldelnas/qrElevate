@@ -14,11 +14,14 @@ import {
   NbButtonModule,
   NbCardModule,
   NbDatepickerModule,
+  NbDialogModule,
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
   NbMenuModule,
+  NbRouteTabsetModule,
   NbSidebarModule,
+  NbTabsetModule,
 } from '@nebular/theme';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -45,6 +48,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     NbCardModule,
     NbInputModule,
     NbDatepickerModule,
+    NbRouteTabsetModule,
+    NbDialogModule.forChild(),
     QRCodeModule,
     SharedModule,
   ],

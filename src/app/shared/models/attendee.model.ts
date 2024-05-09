@@ -3,6 +3,7 @@ export interface Attendee {
   age: number;
   firstName: string;
   lastName: string;
+  mobile: number;
   sex: string;
   school?: string;
   invitedBy?: string;
@@ -10,7 +11,8 @@ export interface Attendee {
 }
 
 export interface UniteAttendee extends Attendee {
-  claimedFood: boolean;
-  district: string;
-  school: string;
+  claimedFood?: boolean;
+  district?: string;
+  facebookAcc?: string;
+  ticketNo: string;
 }

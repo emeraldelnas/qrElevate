@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Attendee, UniteAttendee } from '@models/attendee.model';
 import { AttendeesTotals } from '@models/attendeesTotals.model';
 import { DbService } from '@services/db.service';
@@ -14,8 +14,9 @@ export class UniteAttendeesComponent implements OnInit {
   attendees!: Observable<UniteAttendee[]>;
   totals!: Observable<AttendeesTotals>;
 
-  constructor(private db: DbService) {
+  constructor(private db: DbService, private renderer: Renderer2) {
     this.attendees = this.db.oGetUniteAttendeesSpecificDay();
+    this.attendees.subscribe(res => console.log(res));
     this.totals = this.db.getUniteDayTotals();
   }
 
@@ -32,6 +33,13 @@ export class UniteAttendeesComponent implements OnInit {
 
     this.attendees = this.db.oGetUniteAttendeesSpecificDay(selectedDay);
     this.totals = this.db.getDayTotals(selectedDay);
+  }
+
+  copyMobileToClipboard(phone: number, cellClass: string): void {
+    navigator.clipboard.writeText(phone.toString());
+    const element = document.getElementById(cellClass);
+
+    this.renderer.addClass(element, 'copied');
   }
 
   identify(index: number, item: any): number {

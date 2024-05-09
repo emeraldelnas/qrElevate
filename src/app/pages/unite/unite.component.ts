@@ -25,6 +25,27 @@ export class UniteComponent implements OnInit {
     },
   ];
 
+  tabs = [
+    {
+      title: 'Registrants',
+      route: '/unite-dashboard/registrants',
+      icon: 'people',
+      responsive: true, // hide title before `$tabset-tab-text-hide-breakpoint` value
+    },
+    {
+      title: 'Attendees',
+      route: '/unite-dashboard/attendees',
+      icon: 'checkmark-square-2',
+      responsive: true,
+    },
+    {
+      title: 'Generate QR Code',
+      route: '/unite-dashboard/generate-qr',
+      icon: 'image-2',
+      responsive: true,
+    }
+  ];
+
   constructor() {}
 
   ngOnInit(): void {}

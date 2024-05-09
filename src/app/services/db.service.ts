@@ -13,6 +13,7 @@ import { Attendee, UniteAttendee } from '@models/attendee.model';
 import { Registrant, UniteRegistrant } from '@models/registrant.model';
 import firebase from 'firebase/compat/app';
 import { lastValueFrom, map, Observable, take } from 'rxjs';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -81,10 +82,16 @@ export class DbService {
       );
   }
 
-  oGetUniteRegistrants(): Observable<UniteRegistrant[]> {
+  oGetUniteRegistrants(date = new Date): Observable<UniteRegistrant[]> {
+    const dates = this.getFirstAndLastDateOfYear(date);
+
     return this.afs
       .collection('uniteregistrants', (ref) => {
-        return ref.orderBy('created_at', 'asc');
+        // return ref.orderBy('created_at', 'asc');
+
+        return ref.where('created_at', '>=', dates.startDate)
+                  .where('created_at', '<', dates.endDate)
+                  .orderBy('created_at', 'asc');
       })
       .snapshotChanges()
       .pipe(
@@ -92,10 +99,19 @@ export class DbService {
           actions.map((a) => {
             const data = a.payload.doc.data() as UniteRegistrant;
             const id = a.payload.doc.id;
-            return { docId: id, ...data };
+            const timestamp = data.created_at.toDate();
+
+            return { docId: id, ...data, timestamp };
           })
         )
       );
+  }
+
+  private getFirstAndLastDateOfYear(date: Date): { startDate: Date; endDate: Date; } {
+    const year = date.getFullYear();
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year, 11, 31);
+    return { startDate, endDate };
   }
 
   // oGetTodayAttendees(): Observable<any> {
@@ -329,6 +345,10 @@ export class DbService {
     // }
 
     //
+  }
+
+  deleteUniteRegistrant(registrant: UniteRegistrant): Promise<any> {
+    return this.afs.doc('uniteregistrants/' + registrant.docId).delete();
   }
 
   getUniteRegistrant(id: string): Observable<UniteRegistrant> {

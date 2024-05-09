@@ -2,7 +2,7 @@
   <img src="../../../assets/elevate-logo-black.svg" alt="Elevate Logo" />
 </div> -->
 
-<nb-card class="records-container">
+<nb-card class="records-container" style="margin-top: 3rem;">
   <nb-card-header>
     <h4>Unite 2023 Attendees</h4>
   </nb-card-header>
@@ -77,10 +77,12 @@
             <th></th>
             <th style="text-align: left; padding-right: 2rem">Name</th>
             <th style="text-align: right; padding-right: 2rem">Age</th>
-            <th style="padding-right: 2rem">Sex</th>
-            <th style="padding-right: 2rem">District</th>
+            <th style="padding-right: 2rem">Gender</th>
             <th style="padding-right: 2rem">School</th>
-            <th style="padding-right: 2rem">Claimed Food?</th>
+            <th style="padding-right: 2rem">District</th>
+            <th style="padding-right: 2rem">FB Name</th>
+            <th style="padding-right: 2rem">Phone No.</th>
+            <th style="padding-right: 2rem">Ticket No.</th>
             <th>First-timer?</th>
           </tr>
           <tr
@@ -102,13 +104,36 @@
               {{ attendee.sex }}
             </td>
             <td style="text-transform: capitalize; padding-right: 2rem">
-              {{ attendee.district || "" }}
-            </td>
-            <td style="text-transform: capitalize; padding-right: 2rem">
               {{ attendee.school || "" }}
             </td>
             <td style="text-transform: capitalize; padding-right: 2rem">
-              {{ attendee.claimedFood ? "✅ Yes" : "❌ No" }}
+              {{ attendee.district || "" }}
+            </td>
+            <td style="text-transform: capitalize; padding-right: 2rem">
+              <ng-template *ngIf="attendee.facebookAcc">
+                {{ attendee.facebookAcc || "" }}
+              </ng-template>
+            </td>
+            <td [id]="'mob-' + i" style="text-transform: capitalize; padding-right: 2rem">
+              <div *ngIf="attendee.mobile" style="display: flex; gap: 1rem; justify-content: space-between; align-items: center;">
+                <a [href]="'tel:' + attendee.mobile">
+                  {{ attendee.mobile.toString() | slice : 0 : 4 }}
+                  {{ attendee.mobile.toString() | slice : 4 : 7 }}
+                  {{ attendee.mobile.toString() | slice : 7 : 11 }}
+                </a>
+                <button
+                  nbButton
+                  outline
+                  status="primary"
+                  size="tiny"
+                  (click)="copyMobileToClipboard(attendee.mobile, 'mob-' + i)"
+                >
+                  Copy
+                </button>
+              </div>
+            </td>
+            <td style="text-transform: capitalize; padding-right: 2rem">
+              {{ attendee.ticketNo || "" }}
             </td>
             <td [ngClass]="{ 'first-timer': attendee.isFirstTimer }">
               {{ attendee.isFirstTimer ? "✅ Yes" : "❌ No" }}

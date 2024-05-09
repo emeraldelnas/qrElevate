@@ -7,7 +7,7 @@ import { DbService } from '@services/db.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  isUnite = false;
+  isUnite = true;
 
   constructor(db: DbService) {
     db.createCurrentDayAttendeesTotalsDB();

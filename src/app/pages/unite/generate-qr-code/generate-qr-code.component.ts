@@ -17,6 +17,7 @@ export class GenerateQrCodeComponent implements OnInit {
   qrData = '';
 
   qrIconList = {
+    default: './assets/a-elevate.png',
     other: './assets/others-district.png',
     central: './assets/central-district.png',
     east: './assets/east-district.png',
@@ -24,7 +25,7 @@ export class GenerateQrCodeComponent implements OnInit {
     high: './assets/high-district.png',
   };
 
-  qrIcon = this.qrIconList.other;
+  qrIcon = this.qrIconList.default;
 
   singleSelectGroupValue = ['other'];
 

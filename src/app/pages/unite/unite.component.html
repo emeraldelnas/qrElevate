@@ -1,5 +1,8 @@
 <nb-layout>
-  <nb-sidebar responsive>
+
+
+
+  <!-- <nb-sidebar responsive>
     <div style="margin-bottom: 2rem">
       <img
         style="width: 85%; height: auto; display: block; margin: auto"
@@ -8,11 +11,12 @@
       />
     </div>
     <nb-menu [items]="items"></nb-menu>
-  </nb-sidebar>
+  </nb-sidebar> -->
 
-  <nb-layout-column style="padding-top: 0"
-    ><router-outlet></router-outlet
-  ></nb-layout-column>
+  <nb-layout-column style="padding-top: 0">
+    <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
+    <!-- <router-outlet></router-outlet> -->
+  </nb-layout-column>
 </nb-layout>
 
 <!-- <nb-layout>

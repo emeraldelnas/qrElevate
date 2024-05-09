@@ -20,7 +20,7 @@
         <img src="../../../assets/unite-2023-logo.png" alt="UNITE 2023 Logo" />
       </div>
       <div class="title">
-        <h1>ELEVATE CDO UNITE 2023</h1>
+        <h1>ELEVATE CDO UNITE 2024</h1>
         <h2>Registration</h2>
       </div>
       <div class="form-control">
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="form-control">
-        <label for="mobile" class="label">Mobile *</label>
+        <label for="mobile" class="label">Phone Number *</label>
         <input
           formControlName="mobile"
           name="mobile"
@@ -84,6 +84,21 @@
             Please enter your mobile number.
           </div>
         </div>
+      </div>
+
+      <div class="form-control">
+        <label for="facebook-account" class="label">Facebook Name</label>
+        <input
+          formControlName="facebookAcc"
+          name="facebook-account"
+          id="facebook-account"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Facebook Name"
+          autocomplete="off"
+        />
       </div>
 
       <!-- SELECT SCHOOL -->
@@ -111,6 +126,29 @@
             >
           </nb-option-group>
         </nb-select>
+      </div>
+
+      <div *ngIf="school.value === 'Other'" class="form-control">
+        <label for="otherSchoolName" class="label">
+          School Name *
+        </label>
+        <input
+          formControlName="otherSchoolName"
+          name="otherSchoolName"
+          id="otherSchoolName"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="School Name"
+          class="capitalize"
+          autocomplete="off"
+        />
+        <div *ngIf="showError(otherSchoolName)">
+          <div *ngIf="(otherSchoolName?.errors)!['required']" class="invalid-feedback">
+            Please enter the name of your school.
+          </div>
+        </div>
       </div>
 
       <!-- AUTO SELECT -->
@@ -184,6 +222,27 @@
         <div *ngIf="showError(sex)">
           <div *ngIf="(sex?.errors)!['required']" class="invalid-feedback">
             Please input your sex.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="ticket-no" class="label">Ticket Number *</label>
+        <input
+          formControlName="ticketNo"
+          name="ticket-no"
+          id="ticket-no"
+          type="text"
+          nbInput
+          fullWidth
+          shape="semi-round"
+          placeholder="Ticket Number"
+          class="capitalize"
+          autocomplete="off"
+        />
+        <div *ngIf="showError(ticketNo)">
+          <div *ngIf="(ticketNo?.errors)!['required']" class="invalid-feedback">
+            Please enter your ticket number.
           </div>
         </div>
       </div>
@@ -289,12 +348,6 @@
           <p>
             You belong to
             <strong
-              [ngClass]="{
-                central: district === 'CENTRAL',
-                east: district === 'EAST',
-                west: district === 'WEST',
-                high: district === 'HIGH'
-              }"
               >{{ district }}</strong
             >
             District! 🌟

@@ -1,0 +1,12 @@
+<nb-card>
+  <nb-card-header>{{ title }}</nb-card-header>
+  <nb-card-body>
+    <p>{{ message }}</p>
+  </nb-card-body>
+  <nb-card-footer>
+    <div style="display: flex; column-gap: 1rem; justify-content: flex-end;">
+      <button (click)="close(false)" nbButton hero status="basic">Cancel</button>
+      <button (click)="close(true)" nbButton hero status="danger">Delete</button>
+    </div>
+  </nb-card-footer>
+</nb-card>

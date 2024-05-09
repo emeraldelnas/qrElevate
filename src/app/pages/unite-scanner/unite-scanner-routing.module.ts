@@ -14,10 +14,10 @@ const routes: Routes = [
         path: 'attendee',
         component: AttendeeScannerComponent,
       },
-      {
-        path: 'freebie',
-        component: FreebieScannerComponent,
-      },
+      // {
+      //   path: 'freebie',
+      //   component: FreebieScannerComponent,
+      // },
     ],
   },
 ];

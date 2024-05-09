@@ -1,7 +1,9 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { UniteRegistrant } from '@models/registrant.model';
+import { NbDialogService } from '@nebular/theme';
 import { DbService } from '@services/db.service';
 import { Observable, tap } from 'rxjs';
+import { DeletePromptComponent } from 'src/app/shared/components/delete-prompt/delete-prompt.component';
 
 @Component({
   selector: 'app-unite-registrants',
@@ -11,9 +13,10 @@ import { Observable, tap } from 'rxjs';
 export class UniteRegistrantsComponent implements OnInit {
   registrants!: Observable<UniteRegistrant[]>;
 
-  constructor(private db: DbService, private renderer: Renderer2) {
+  eventDate!: Date;
+
+  constructor(private db: DbService, private renderer: Renderer2, private dialogService: NbDialogService) {
     this.registrants = this.db.oGetUniteRegistrants();
-    // .pipe(tap((s) => console.log(s)));
   }
 
   ngOnInit(): void {}
@@ -35,4 +38,29 @@ export class UniteRegistrantsComponent implements OnInit {
 
     this.renderer.addClass(element, 'copied');
   }
+
+  onEventDateChange(date: Date): void {
+    // const options: Intl.DateTimeFormatOptions = {
+    //   month: 'long',
+    //   day: 'numeric',
+    //   year: 'numeric',
+    // };
+
+    // const selectedDay = e.toLocaleDateString('en-us', options);
+
+    // this.attendees = this.db.oGetUniteAttendeesSpecificDay(selectedDay);
+    // this.totals = this.db.getDayTotals(selectedDay);
+
+    this.registrants = this.db.oGetUniteRegistrants(date);
+  }
+
+  deleteUniteRegistrant(registrant: UniteRegistrant) {
+    this.dialogService.open(DeletePromptComponent)
+      .onClose.subscribe(response => {
+        if(response) {
+          this.db.deleteUniteRegistrant(registrant);
+        }
+      });
+
+    }
 }

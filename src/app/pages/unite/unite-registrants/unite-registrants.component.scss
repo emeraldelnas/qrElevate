@@ -7,6 +7,12 @@
   }
 }
 
+.registrants-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 tbody {
   tr {
     &:nth-child(odd) {
@@ -14,8 +20,8 @@ tbody {
     }
 
     td {
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding: 5px 1rem;
+      white-space: nowrap;
     }
   }
 }

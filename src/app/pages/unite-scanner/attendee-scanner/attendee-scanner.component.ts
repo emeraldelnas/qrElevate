@@ -72,11 +72,14 @@ export class AttendeeScannerComponent implements OnInit {
                       age,
                       firstName: res.firstName,
                       lastName: res.lastName,
+                      facebookAcc: res.facebookAcc,
+                      mobile: res.mobile,
                       sex: res.sex,
                       school: res.school || '',
-                      isFirstTimer: res.isFirstTimer || false,
-                      claimedFood: res.claimedFood,
                       district: res.district || '',
+                      ticketNo: res.ticketNo,
+                      isFirstTimer: res.isFirstTimer || false,
+                      // claimedFood: res.claimedFood,
                     };
 
                     this.db

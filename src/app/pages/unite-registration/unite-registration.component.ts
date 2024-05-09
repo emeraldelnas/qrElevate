@@ -35,11 +35,11 @@ export class UniteRegistrationComponent implements OnInit {
   qrLogo = 75;
 
   defaultIcon = './assets/a-elevate.png';
-  centralIcon = './assets/central-district.png';
-  eastIcon = './assets/east-district.png';
-  westIcon = './assets/west-district.png';
-  highIcon = './assets/high-district.png';
-  othersIcon = './assets/others-district.png';
+  // centralIcon = './assets/central-district.png';
+  // eastIcon = './assets/east-district.png';
+  // westIcon = './assets/west-district.png';
+  // highIcon = './assets/high-district.png';
+  // othersIcon = './assets/others-district.png';
   qrIcon = this.defaultIcon;
 
   generateQR = false;
@@ -79,7 +79,7 @@ export class UniteRegistrationComponent implements OnInit {
         children: [
           'Xavier University - Ateneo de Cagayan',
           'Lourdes College',
-          'Pilgrim College',
+          'Pilgrim Christian College',
         ],
       },
       {
@@ -95,29 +95,33 @@ export class UniteRegistrationComponent implements OnInit {
         children: [
           'Liceo de Cagayan University',
           'Cagayan de Oro College - PHINMA Education Network',
-          'Informatics College',
           'Golden Heritage School',
-          'Mindanao State University - Iligan Institute of Technology',
         ],
       },
       {
         name: 'HIGH',
         children: [
           "Abba's Orchard",
-          'Oro Christian Grace School',
-          'Corpus Christi',
-          'Regional Science High School',
-          'East City Central School',
-          'Lapasan National High School',
-          'Angelicum Learning Center',
-          "St. Mary's Academy",
+          "Angelicum Learning Center",
+          "City Central School",
+          'Corpus Christi School',
+          'Kong Hua School',
           'Misamis Oriental General Comprehensive High School',
-          'Pedro "Oloy" N. Roa Sr. Elementary School',
+          'National High School',
+          'Oro Christian Grace School',
           'Pedro "Oloy" N. Roa Sr. High School',
-          'Gusa National High School',
-          'Cagayan de Oro Nation High School',
-          'West City Central School',
-          'Philippine Science High School',
+          'Regional Science High School',
+          'Shekinah Glory Christian Academy',
+          "St. Mary's Academy",
+          "St. Mary's School",
+
+          // 'East City Central School',
+          // 'Lapasan National High School',
+          // 'Pedro "Oloy" N. Roa Sr. Elementary School',
+          // 'Gusa National High School',
+          // 'Cagayan de Oro Nation High School',
+          // 'West City Central School',
+          // 'Philippine Science High School',
         ],
       },
     ];
@@ -170,13 +174,30 @@ export class UniteRegistrationComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      mobile: ['', Validators.required],
+      facebookAcc: [''],
+      school: ['', Validators.required],
+      otherSchoolName: [''],
       birthdate: ['', Validators.required],
       sex: ['', Validators.required],
-      mobile: ['', Validators.required],
-      school: ['', Validators.required],
+      ticketNo: ['', Validators.required],
       isFirstTimer: [false],
-      claimedFood: [false],
-    });
+      // claimedFood: [false]
+    }, { validator: this.requireIfSchoolIsSetToOther });
+  }
+
+  requireIfSchoolIsSetToOther(form: FormGroup) {
+    const schoolControl = form.get('school');
+    const otherSchoolNameControl = form.get('otherSchoolName');
+
+    if (schoolControl && otherSchoolNameControl) {
+      const schoolValue = schoolControl.value;
+      if (schoolValue === 'Other' && !otherSchoolNameControl.value) {
+        otherSchoolNameControl.setErrors({ required: true });
+      } else {
+        otherSchoolNameControl.setErrors(null);
+      }
+    }
   }
 
   async submit(): Promise<void> {
@@ -187,11 +208,18 @@ export class UniteRegistrationComponent implements OnInit {
 
       const formValues = this.registerForm.value;
 
+      if(this.school.value === 'Other') {
+        formValues.school = formValues.otherSchoolName;
+      }
+
+      const { otherSchoolName, ...rest } = formValues;
+
+
       this.district = this.findDistrict(this.school.value);
-      this.qrIcon = this.getDistrictIcon(this.district);
+      // this.qrIcon = this.getDistrictIcon(this.district);
 
       const payload = {
-        ...formValues,
+        ...rest,
         birthdate: dayjs(formValues.birthdate).toISOString(),
         district: this.district,
       };
@@ -289,16 +317,24 @@ export class UniteRegistrationComponent implements OnInit {
     return <FormControl>this.registerForm.get('mobile');
   }
 
-  get sex(): FormControl {
-    return <FormControl>this.registerForm.get('sex');
+  get school(): FormControl {
+    return <FormControl>this.registerForm.get('school');
+  }
+
+  get otherSchoolName(): FormControl {
+    return <FormControl>this.registerForm.get('otherSchoolName');
   }
 
   get birthdate(): FormControl {
     return <FormControl>this.registerForm.get('birthdate');
   }
 
-  get school(): FormControl {
-    return <FormControl>this.registerForm.get('school');
+  get sex(): FormControl {
+    return <FormControl>this.registerForm.get('sex');
+  }
+
+  get ticketNo(): FormControl {
+    return <FormControl>this.registerForm.get('ticketNo');
   }
 
   private filterChildren(children: string[], filterValue: string) {
@@ -343,25 +379,25 @@ export class UniteRegistrationComponent implements OnInit {
     return registrantDistrict;
   }
 
-  getDistrictIcon(district: string): string {
-    switch (district) {
-      case 'CENTRAL':
-        return this.centralIcon;
+  // getDistrictIcon(district: string): string {
+  //   switch (district) {
+  //     case 'CENTRAL':
+  //       return this.centralIcon;
 
-      case 'EAST':
-        return this.eastIcon;
+  //     case 'EAST':
+  //       return this.eastIcon;
 
-      case 'WEST':
-        return this.westIcon;
+  //     case 'WEST':
+  //       return this.westIcon;
 
-      case 'HIGH':
-        return this.highIcon;
+  //     case 'HIGH':
+  //       return this.highIcon;
 
-      case 'OTHER':
-        return this.othersIcon;
+  //     case 'OTHER':
+  //       return this.othersIcon;
 
-      default:
-        return this.defaultIcon;
-    }
-  }
+  //     default:
+  //       return this.defaultIcon;
+  //   }
+  // }
 }

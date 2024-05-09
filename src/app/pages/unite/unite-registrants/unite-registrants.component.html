@@ -2,11 +2,31 @@
   <img src="../../../assets/elevate-logo-black.svg" alt="Elevate Logo" />
 </div> -->
 
-<nb-card class="records-container">
+<nb-card class="records-container" style="margin-top: 3rem;">
   <nb-card-header>
-    <h4>Unite 2023 Registrants</h4>
+    <div class="registrants-header">
+      <h4>Unite 2024 Registrants</h4>
+      <div class="controls">
+        <div class="form-control">
+          <label for="eventDate" class="label">Select Date </label>
+          <input
+            nbInput
+            [(ngModel)]="eventDate"
+            fieldSize="small"
+            placeholder="Date"
+            [nbDatepicker]="eventDatePicker"
+            id="eventDate"
+          />
+          <nb-datepicker
+            #eventDatePicker
+            (dateChange)="onEventDateChange($event)"
+          ></nb-datepicker>
+        </div>
+      </div>
+    </div>
   </nb-card-header>
   <nb-card-body>
+
     <table id="registrants-table" class="custom-table" width="100%">
       <thead>
         <tr>
@@ -16,8 +36,11 @@
           <th style="text-align: center">Gender</th>
           <th>School</th>
           <th>District</th>
+          <th>Phone No.</th>
+          <th>Ticket No.</th>
+          <th>Registered On</th>
           <th style="text-align: center">ID Code</th>
-          <th style="text-align: center">Mobile</th>
+          <th></th>
           <!-- <th style="padding-right: 2rem">School</th>
           <th style="padding-right: 2rem">Invited By</th>
           <th>First-timer?</th> -->
@@ -49,31 +72,8 @@
           <td>
             {{ r.district }}
           </td>
-          <td [id]="'docId-' + i">
-            <div
-              style="
-                display: flex;
-                gap: 1rem;
-                justify-content: space-around;
-                align-items: center;
-              "
-            >
-              <p class="m-0">
-                {{ r.docId }}
-              </p>
-              <button
-                nbButton
-                outline
-                status="primary"
-                size="tiny"
-                (click)="copyToClipboard(r.docId, 'docId-' + i)"
-              >
-                Copy
-              </button>
-            </div>
-          </td>
           <td [id]="'mob-' + i">
-            <div style="display: flex; gap: 1rem; justify-content: center">
+            <div style="display: flex; gap: 1rem; justify-content: space-between; align-items: center;">
               <a [href]="'tel:' + r.mobile">
                 {{ r.mobile.toString() | slice : 0 : 4 }}
                 {{ r.mobile.toString() | slice : 4 : 7 }}
@@ -89,6 +89,46 @@
                 Copy
               </button>
             </div>
+          </td>
+          <td>
+            {{ r.ticketNo }}
+          </td>
+          <td>
+            {{ r.timestamp | date }}
+          </td>
+          <td [id]="'docId-' + i">
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <!-- <p class="m-0">
+                {{ r.docId }}
+              </p> -->
+              <button
+                nbButton
+                outline
+                status="primary"
+                size="tiny"
+                (click)="copyToClipboard(r.docId, 'docId-' + i)"
+              >
+                Copy
+              </button>
+            </div>
+          </td>
+          <td style="text-align: right;">
+            <button
+                nbButton
+                outline
+                status="danger"
+                size="tiny"
+                (click)="deleteUniteRegistrant(r)"
+              >
+                Delete <nb-icon icon="trash-2"></nb-icon>
+              </button>
           </td>
           <!-- <td style="text-transform: capitalize; padding-right: 2rem">
             {{ r.school || "" }}
