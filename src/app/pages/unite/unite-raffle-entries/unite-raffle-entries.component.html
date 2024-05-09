@@ -5,28 +5,27 @@
   <nb-card-body>
 
     <div style="margin-bottom: 3rem;">
+      <div class="controls" style="margin-bottom: 1rem;">
+        <div class="form-control" style="display: flex; flex-direction: column;">
+          <label for="eventDate" class="label">Event Date</label>
+          <input
+            nbInput
+            [(ngModel)]="eventDate"
+            fieldSize="small"
+            placeholder="Pick Date"
+            [nbDatepicker]="eventDatePicker"
+            id="eventDate"
+          />
+          <nb-datepicker
+            #eventDatePicker
+          ></nb-datepicker>
+        </div>
+        <!-- <button nbButton (click)="printDiv()" outline status="primary">Print</button> -->
+      </div>
       <small>INCLUDE:</small>
-      <div style="display: flex; align-items: center; column-gap: 1rem; margin-bottom: 1rem;">
+      <div style="display: flex; align-items: center; column-gap: 1rem; margin-bottom: 2rem;">
         <nb-checkbox status="primary" (checkedChange)="toggleTicketNo($event)" [checked]="true">Ticket No.</nb-checkbox>
         <nb-checkbox status="primary" (checkedChange)="toggleName($event)">Name</nb-checkbox>
-
-        <div class="controls" style="margin-left: 2rem">
-          <div class="form-control" style="display: flex; align-items: center; column-gap: 1rem;">
-            <label for="eventDate" class="label">Event Date</label>
-            <input
-              nbInput
-              [(ngModel)]="eventDate"
-              fieldSize="small"
-              placeholder="Pick Date"
-              [nbDatepicker]="eventDatePicker"
-              id="eventDate"
-            />
-            <nb-datepicker
-              #eventDatePicker
-            ></nb-datepicker>
-          </div>
-          <!-- <button nbButton (click)="printDiv()" outline status="primary">Print</button> -->
-        </div>
       </div>
       <button
         nbButton
