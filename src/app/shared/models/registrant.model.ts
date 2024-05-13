@@ -25,6 +25,7 @@ export interface UniteRegistrant {
   district?: string;
   ticketNo: string;
   isFirstTimer?: boolean;
+  leader?: string;
   claimedFood: boolean;
   created_at: Timestamp;
   timestamp?: Date;

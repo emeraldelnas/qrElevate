@@ -182,6 +182,7 @@ export class UniteRegistrationComponent implements OnInit {
       sex: ['', Validators.required],
       ticketNo: ['', Validators.required],
       isFirstTimer: [false],
+      leader: ['']
       // claimedFood: [false]
     }, { validator: this.requireIfSchoolIsSetToOther });
   }

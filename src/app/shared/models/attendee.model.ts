@@ -11,6 +11,7 @@ export interface Attendee {
 }
 
 export interface UniteAttendee extends Attendee {
+  leader?: string;
   claimedFood?: boolean;
   district?: string;
   facebookAcc?: string;

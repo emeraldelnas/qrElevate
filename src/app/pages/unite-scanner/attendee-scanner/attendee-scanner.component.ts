@@ -79,6 +79,7 @@ export class AttendeeScannerComponent implements OnInit {
                       district: res.district || '',
                       ticketNo: res.ticketNo,
                       isFirstTimer: res.isFirstTimer || false,
+                      leader: res.leader,
                       // claimedFood: res.claimedFood,
                     };
 

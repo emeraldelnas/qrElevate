@@ -82,8 +82,9 @@
             <th style="padding-right: 2rem">District</th>
             <th style="padding-right: 2rem">FB Name</th>
             <th style="padding-right: 2rem">Phone No.</th>
-            <th style="padding-right: 2rem">Ticket No.</th>
             <th>First-timer?</th>
+            <th>Leader</th>
+            <th style="padding-right: 2rem">Ticket No.</th>
             <th></th>
           </tr>
           <tr
@@ -133,11 +134,14 @@
                 </button>
               </div>
             </td>
-            <td style="text-transform: capitalize; padding-right: 2rem">
-              {{ attendee.ticketNo || "" }}
-            </td>
             <td [ngClass]="{ 'first-timer': attendee.isFirstTimer }">
               {{ attendee.isFirstTimer ? "✅ Yes" : "❌ No" }}
+            </td>
+            <td style="text-transform: capitalize; padding-right: 2rem">
+              {{ attendee.leader || "" }}
+            </td>
+            <td style="text-transform: capitalize; padding-right: 2rem">
+              {{ attendee.ticketNo || "" }}
             </td>
             <td style="text-align: right;">
               <button
