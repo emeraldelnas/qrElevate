@@ -17,10 +17,10 @@
       (ngSubmit)="submit()"
     >
       <div class="unite-logo">
-        <img src="../../../assets/unite2024-logo.png" alt="UNITE 2023 Logo" />
+        <img src="../../../assets/campusunitelogo.png" [alt]="'CAMPUS UNITE ' + currentYear + ' Logo'" />
       </div>
       <div class="title">
-        <h1>ELEVATE CDO UNITE 2024</h1>
+        <h1>ELEVATE CDO CAMPUS UNITE 2025</h1>
         <h2>Registration</h2>
       </div>
       <div class="form-control">
@@ -226,8 +226,8 @@
         </div>
       </div>
 
-      <div class="form-control">
-        <label for="ticket-no" class="label">Ticket Number *</label>
+      <!-- <div class="form-control">
+        <label for="ticket-no" class="label">Ticket Number</label>
         <input
           formControlName="ticketNo"
           name="ticket-no"
@@ -245,7 +245,7 @@
             Please enter your ticket number.
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="form-control" style="margin-top: 1.5rem">
         <nb-checkbox formControlName="isFirstTimer"
@@ -327,8 +327,8 @@
       <div *ngIf="generateQR">
         <div class="unite-logo" style="margin-bottom: 2rem">
           <img
-            src="../../../assets/unite2024-logo.png"
-            alt="UNITE 2023 Logo"
+            src="../../../assets/campusunitelogo.png"
+            [alt]="'CAMPUS UNITE ' + currentYear + ' Logo'"
           />
         </div>
 
@@ -340,11 +340,11 @@
           >
           <br />
           <strong>
-            Make sure to bring it on the event to claim your snacks! 😊
+            Make sure to bring it on the event for us to confirm your attendance! 😊
           </strong>
         </div>
 
-        <div *ngIf="district !== 'OTHER'" class="district">
+        <!-- <div *ngIf="district !== 'OTHER'" class="district">
           <p>
             You belong to
             <strong
@@ -352,7 +352,7 @@
             >
             District! 🌟
           </p>
-        </div>
+        </div> -->
 
         <qrcode
           #qrImage

@@ -58,6 +58,8 @@ export class UniteRegistrationComponent implements OnInit {
   // availableSchools: string[] = [];
   filteredGroups$!: Observable<Group[]>;
 
+  currentYear = new Date().getFullYear();
+
   constructor(private fb: FormBuilder, private db: DbService) {}
 
   ngOnInit(): void {
@@ -180,7 +182,7 @@ export class UniteRegistrationComponent implements OnInit {
       otherSchoolName: [''],
       birthdate: ['', Validators.required],
       sex: ['', Validators.required],
-      ticketNo: ['', Validators.required],
+      ticketNo: [''],
       isFirstTimer: [false],
       leader: ['']
       // claimedFood: [false]

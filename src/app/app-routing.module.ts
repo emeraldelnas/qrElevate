@@ -30,7 +30,7 @@ const routes: Routes = [
     component: MenRegistrantsComponent,
   },
   {
-    path: 'unite2024',
+    path: 'campusunite2025',
     component: UniteRegistrationComponent,
   },
   {

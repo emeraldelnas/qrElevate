@@ -12,7 +12,7 @@ import {
 import { Attendee, UniteAttendee } from '@models/attendee.model';
 import { Registrant, UniteRegistrant } from '@models/registrant.model';
 import firebase from 'firebase/compat/app';
-import { lastValueFrom, map, Observable, take, tap } from 'rxjs';
+import { lastValueFrom, map, Observable, shareReplay, take, tap } from 'rxjs';
 import { Timestamp } from '@angular/fire/firestore';
 
 @Injectable({
@@ -339,14 +339,15 @@ export class DbService {
       .collection(selectedDay, (ref) => {
         return ref.orderBy('lastName', 'asc');
       })
-      .snapshotChanges().pipe(map((actions) =>
-        actions.map((a) => {
+      .snapshotChanges().pipe(
+        map((actions) => actions.map((a) => {
           const data = a.payload.doc.data() as UniteAttendee;
           const id = a.payload.doc.id;
 
           return { id, ...data };
-        })
-      ));
+        })),
+        shareReplay(1)
+      );
   }
 
   addUniteRegistrant(registrant: UniteRegistrant): Promise<any> {

@@ -12,7 +12,7 @@ import { DeletePromptComponent } from 'src/app/shared/components/delete-prompt/d
 })
 export class UniteRegistrantsComponent implements OnInit {
   registrants!: Observable<UniteRegistrant[]>;
-
+  currentYear = new Date().getFullYear();
   eventDate!: Date;
 
   constructor(private db: DbService, private renderer: Renderer2, private dialogService: NbDialogService) {

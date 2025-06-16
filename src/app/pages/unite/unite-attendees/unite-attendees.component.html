@@ -4,46 +4,48 @@
 
 <nb-card class="records-container" style="margin-top: 3rem;">
   <nb-card-header>
-    <h4>Unite 2024 Attendees</h4>
+    <h4>Campus Unite {{currentYear}} Attendees</h4>
   </nb-card-header>
   <nb-card-body>
     <div class="records-header">
       <div>
         <p class="totals-title">Totals:</p>
         <div class="totals-container">
-          <div class="total-attendees">
+          <div class="total-attendees" style="padding-right: 1.75rem;border-right: solid 1px #eee;">
             <p>
-              Attendees:&nbsp;<span>{{
-                (totals | async)?.totalAttendees || 0
-              }}</span>
+              Attendees:&nbsp;
+              <!-- <span>{{ (totals | async)?.totalAttendees || 0 }}</span> -->
+              <span>{{totalAttendees$ | async}}</span>
             </p>
             <div class="details">
               <p>
-                Male:&nbsp;<span>{{ (totals | async)?.totalMale || 0 }}</span>
+                Male:&nbsp;
+                <!-- <span>{{ (totals | async)?.totalMale || 0 }}</span> -->
+                <span>{{totalMale$ | async}}</span>
               </p>
               <p>
-                Female:&nbsp;<span>{{
-                  (totals | async)?.totalFemale || 0
-                }}</span>
+                Female:&nbsp;
+                <!-- <span>{{(totals | async)?.totalFemale || 0}}</span> -->
+                <span>{{totalFemale$ | async}}</span>
               </p>
             </div>
           </div>
           <div class="total-first-timers">
             <p>
-              First Timers:&nbsp;<span>{{
-                (totals | async)?.totalFirstTimers || 0
-              }}</span>
+              First Timers:&nbsp;
+              <!-- <span>{{(totals | async)?.totalFirstTimers || 0}}</span> -->
+              <span>{{totalFirstTimers$ | async}}</span>
             </p>
             <div class="details">
               <p>
-                Male:&nbsp;<span>{{
-                  (totals | async)?.totalMaleFirstTimers || 0
-                }}</span>
+                Male:&nbsp;
+                <!-- <span>{{(totals | async)?.totalMaleFirstTimers || 0}}</span> -->
+                <span>{{totalMaleFirstTimers$ | async}}</span>
               </p>
               <p>
-                Female:&nbsp;<span>{{
-                  (totals | async)?.totalFemaleFirstTimers || 0
-                }}</span>
+                Female:&nbsp;
+                <!-- <span>{{(totals | async)?.totalFemaleFirstTimers || 0}}</span> -->
+                <span>{{totalFemaleFirstTimers$ | async}}</span>
               </p>
             </div>
           </div>
@@ -84,7 +86,7 @@
             <th style="padding-right: 2rem">Phone No.</th>
             <th>First-timer?</th>
             <th>Leader</th>
-            <th style="padding-right: 2rem">Ticket No.</th>
+            <!-- <th style="padding-right: 2rem">Ticket No.</th> -->
             <th></th>
           </tr>
           <tr
@@ -140,9 +142,9 @@
             <td style="text-transform: capitalize; padding-right: 2rem">
               {{ attendee.leader || "" }}
             </td>
-            <td style="text-transform: capitalize; padding-right: 2rem">
+            <!-- <td style="text-transform: capitalize; padding-right: 2rem">
               {{ attendee.ticketNo || "" }}
-            </td>
+            </td> -->
             <td style="text-align: right;">
               <button
                 nbButton

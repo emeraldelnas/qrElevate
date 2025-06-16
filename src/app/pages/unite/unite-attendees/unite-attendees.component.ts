@@ -3,7 +3,7 @@ import { Attendee, UniteAttendee } from '@models/attendee.model';
 import { AttendeesTotals } from '@models/attendeesTotals.model';
 import { NbDialogService } from '@nebular/theme';
 import { DbService } from '@services/db.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { DeletePromptComponent } from 'src/app/shared/components/delete-prompt/delete-prompt.component';
 
 @Component({
@@ -15,10 +15,42 @@ export class UniteAttendeesComponent implements OnInit {
   eventDate!: Date;
   attendees!: Observable<UniteAttendee[]>;
   totals!: Observable<AttendeesTotals>;
+  currentYear = new Date().getFullYear();
+
+  totalAttendees$: Observable<number>;
+  totalFirstTimers$: Observable<number>;
+  totalMale$: Observable<number>;
+  totalFemale$: Observable<number>;
+  totalMaleFirstTimers$: Observable<number>;
+  totalFemaleFirstTimers$: Observable<number>;
 
   constructor(private db: DbService, private renderer: Renderer2, private dialogService: NbDialogService) {
     this.attendees = this.db.oGetUniteAttendeesSpecificDay();
-    this.totals = this.db.getUniteDayTotals();
+    // this.totals = this.db.getUniteDayTotals();
+
+    this.totalAttendees$ = this.attendees.pipe(
+      map(attendees => attendees.length)
+    );
+
+    this.totalFirstTimers$ = this.attendees.pipe(
+      map(attendees => attendees.filter(attendee => attendee.isFirstTimer).length)
+    );
+
+    this.totalMale$ = this.attendees.pipe(
+      map(attendees => attendees.filter(attendee => attendee.sex === 'male').length)
+    );
+
+    this.totalFemale$ = this.attendees.pipe(
+      map(attendees => attendees.filter(attendee => attendee.sex === 'female').length)
+    );
+
+    this.totalMaleFirstTimers$ = this.attendees.pipe(
+      map(attendees => attendees.filter(attendee => attendee.isFirstTimer && attendee.sex === 'male').length)
+    );
+
+    this.totalFemaleFirstTimers$ = this.attendees.pipe(
+      map(attendees => attendees.filter(attendee => attendee.isFirstTimer && attendee.sex === 'female').length)
+    );
   }
 
   ngOnInit(): void {}

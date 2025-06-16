@@ -44,12 +44,12 @@ export class UniteComponent implements OnInit {
       icon: 'image-2',
       responsive: true,
     },
-    {
-      title: 'Raffle Entries',
-      route: '/unite-dashboard/raffle-entries',
-      icon: 'list',
-      responsive: true,
-    }
+    // {
+    //   title: 'Raffle Entries',
+    //   route: '/unite-dashboard/raffle-entries',
+    //   icon: 'list',
+    //   responsive: true,
+    // }
   ];
 
   constructor() {}
