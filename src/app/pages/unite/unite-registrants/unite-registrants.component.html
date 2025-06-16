@@ -32,12 +32,12 @@
         <tr>
           <th></th>
           <th style="text-align: left; padding-right: 2rem">Name</th>
-          <th style="text-align: center">Age</th>
+          <!-- <th style="text-align: center">Age</th> -->
           <th style="text-align: center">Gender</th>
           <th>School</th>
           <th>District</th>
-          <th>FB Name</th>
-          <th>Phone No.</th>
+          <!-- <th>FB Name</th>
+          <th>Phone No.</th> -->
           <th>First-timer?</th>
           <th>Dgroup Leader</th>
           <!-- <th>Ticket No.</th> -->
@@ -63,9 +63,9 @@
           <td style="padding-right: 2rem">
             {{ r.lastName }}, {{ r.firstName }}
           </td>
-          <td style="text-align: center">
+          <!-- <td style="text-align: center">
             {{ r.birthdate | age }}
-          </td>
+          </td> -->
           <td style="text-align: center; text-transform: capitalize">
             {{ r.sex }}
           </td>
@@ -75,10 +75,10 @@
           <td>
             {{ r.district }}
           </td>
-          <td>
+          <!-- <td>
             {{ r.facebookAcc }}
-          </td>
-          <td [id]="'mob-' + i">
+          </td> -->
+          <!-- <td [id]="'mob-' + i">
             <div style="display: flex; gap: 1rem; justify-content: space-between; align-items: center;">
               <a [href]="'tel:' + r.mobile">
                 {{ r.mobile.toString() | slice : 0 : 4 }}
@@ -95,7 +95,7 @@
                 Copy
               </button>
             </div>
-          </td>
+          </td> -->
           <td>
             {{ r.isFirstTimer ? "✅ Yes" : "❌ No" }}
           </td>

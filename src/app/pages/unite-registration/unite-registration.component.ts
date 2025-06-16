@@ -176,11 +176,11 @@ export class UniteRegistrationComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      mobile: ['', Validators.required],
+      mobile: [''],
       facebookAcc: [''],
       school: ['', Validators.required],
       otherSchoolName: [''],
-      birthdate: ['', Validators.required],
+      birthdate: [''],
       sex: ['', Validators.required],
       ticketNo: [''],
       isFirstTimer: [false],
@@ -222,7 +222,7 @@ export class UniteRegistrationComponent implements OnInit {
 
       const payload = {
         ...rest,
-        birthdate: dayjs(formValues.birthdate).toISOString(),
+        // birthdate: dayjs(formValues.birthdate).toISOString(),
         district: this.district,
       };
 

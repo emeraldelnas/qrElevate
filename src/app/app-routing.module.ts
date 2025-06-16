@@ -8,7 +8,7 @@ import { MenRegistrantsComponent } from './pages/men-registrants/men-registrants
 import { UniteRegistrationComponent } from './pages/unite-registration/unite-registration.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'scanner' },
+  { path: '', pathMatch: 'full', redirectTo: 'unite-scanner' },
   {
     path: 'register',
     component: RegisterComponent,

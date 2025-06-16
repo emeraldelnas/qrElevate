@@ -78,12 +78,12 @@
           <tr>
             <th></th>
             <th style="text-align: left; padding-right: 2rem">Name</th>
-            <th style="text-align: right; padding-right: 2rem">Age</th>
+            <!-- <th style="text-align: right; padding-right: 2rem">Age</th> -->
             <th style="padding-right: 2rem">Gender</th>
             <th style="padding-right: 2rem">School</th>
             <th style="padding-right: 2rem">District</th>
-            <th style="padding-right: 2rem">FB Name</th>
-            <th style="padding-right: 2rem">Phone No.</th>
+            <!-- <th style="padding-right: 2rem">FB Name</th> -->
+            <!-- <th style="padding-right: 2rem">Phone No.</th> -->
             <th>First-timer?</th>
             <th>Leader</th>
             <!-- <th style="padding-right: 2rem">Ticket No.</th> -->
@@ -101,9 +101,9 @@
             <td style="padding-right: 2rem; white-space: nowrap;">
               {{ attendee.lastName }}, {{ attendee.firstName }}
             </td>
-            <td style="text-align: right; padding-right: 2rem">
+            <!-- <td style="text-align: right; padding-right: 2rem">
               {{ attendee.age }}
-            </td>
+            </td> -->
             <td style="text-transform: capitalize; padding-right: 2rem">
               {{ attendee.sex }}
             </td>
@@ -113,12 +113,12 @@
             <td style="text-transform: capitalize; padding-right: 2rem">
               {{ attendee.district || "" }}
             </td>
-            <td style="text-transform: capitalize; padding-right: 2rem; white-space: nowrap;">
+            <!-- <td style="text-transform: capitalize; padding-right: 2rem; white-space: nowrap;">
               <ng-container *ngIf="attendee.facebookAcc">
                 {{ attendee.facebookAcc || "" }}
               </ng-container>
-            </td>
-            <td [id]="'mob-' + i" style="text-transform: capitalize; padding-right: 2rem; white-space: nowrap;">
+            </td> -->
+            <!-- <td [id]="'mob-' + i" style="text-transform: capitalize; padding-right: 2rem; white-space: nowrap;">
               <div *ngIf="attendee.mobile" style="display: flex; gap: 1rem; justify-content: space-between; align-items: center;">
                 <a [href]="'tel:' + attendee.mobile">
                   {{ attendee.mobile.toString() | slice : 0 : 4 }}
@@ -135,7 +135,7 @@
                   Copy
                 </button>
               </div>
-            </td>
+            </td> -->
             <td [ngClass]="{ 'first-timer': attendee.isFirstTimer }">
               {{ attendee.isFirstTimer ? "✅ Yes" : "❌ No" }}
             </td>
